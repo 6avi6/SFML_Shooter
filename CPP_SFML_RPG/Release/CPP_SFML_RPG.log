@@ -1,7 +1,79 @@
-﻿  Player.cpp
+﻿  CPP_SFML_RPG.cpp
+  Game.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(10,17): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(11,17): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(122,27): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(128,27): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+  Player.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.cpp(4,67): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.cpp(4,62): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.cpp(49,40): warning C4244: "+=": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.cpp(50,40): warning C4244: "+=": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.cpp(53,23): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.cpp(55,23): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.cpp(61,68): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.cpp(61,49): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.cpp(69,67): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.cpp(69,48): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
   Trwa generowanie kodu
-  4 of 96 functions ( 4.2%) were compiled, the rest were copied from previous compilation.
+  0 of 211 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
-  CPP_SFML_RPG.vcxproj -> C:\Users\Dawid\Desktop\RPG\CPP_SFML_RPG\Release\CPP_SFML_RPG.exe
+  CPP_SFML_RPG.vcxproj -> C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Release\CPP_SFML_RPG.exe

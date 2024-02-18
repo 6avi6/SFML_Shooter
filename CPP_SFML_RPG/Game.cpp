@@ -7,8 +7,10 @@ void Game::initVariables()
 {
 	this -> window = nullptr;
 	//window size
-	videoMode.height = 600;
-	videoMode.width = 800;
+	windowSize.x = 800.f;
+	windowSize.y = 600.f;
+	videoMode.height = windowSize.y;
+	videoMode.width = windowSize.x;
 	
 	//displayed quality higher = better
 	settings.antialiasingLevel = 8;
@@ -31,6 +33,7 @@ Game::Game()
 	this->initVariables();
 	this->initWindow();
 	this->initPlayer();
+	this->initWeapon();
 }
 
 //Non Argument deconstructor
@@ -46,7 +49,7 @@ const bool Game::running() const
 	return this->window->isOpen();
 }
 
-//Function
+//Reading input from player
 void Game::pollEvents()
 {
 	//Event polling
@@ -70,20 +73,23 @@ void Game::pollEvents()
 	}
 	//move player
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		this->player->changePosition(0.f, -1.f);
+		this->player->changePosition(0.f, -1.f, windowSize);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		this->player->changePosition(0.f, 1.f);
+		this->player->changePosition(0.f, 1.f, windowSize);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		this->player->changePosition(-1.f, 0.f);
+		this->player->changePosition(-1.f, 0.f,windowSize);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		this->player->changePosition(1.f, 0.f);
+		this->player->changePosition(1.f, 0.f,windowSize);
 	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
-		std::cout << "dzia³a";
-
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		// left mouse button is pressed: shoot
+		weapon->addNewBullet(this->player->getPlayerPostion(), this->globalMousePosition);
+		std::cout << globalMousePosition.x << " : " << globalMousePosition.y << std::endl;
+	}
 }
 
 //updating event that happenning on screen mouse click etc
@@ -92,11 +98,38 @@ void Game::update()
 	this->pollEvents();
 }
 
+//creating new player
 void Game::initPlayer()
 {
-	player = new Player();
+	player = new Player(this->windowSize);
 }
 
+//creating new weapon
+void Game::initWeapon() {
+	weapon = new Weapon();
+}
+
+//method that get positon game window 
+//mouse max position is VideoMode.height and width and the lowest are 0a
+void Game::getMousePosition()
+{
+
+	globalMousePosition = sf::Mouse::getPosition(*window);
+	if (globalMousePosition.x > windowSize.x) {
+		globalMousePosition.x = windowSize.x;
+	}
+	else if (globalMousePosition.x <= 0.f) {
+		globalMousePosition.x = 0.f;
+	}
+	if (globalMousePosition.y > windowSize.y) {
+		globalMousePosition.y = windowSize.y;
+	}
+	else if (globalMousePosition.y <= 0.f) {
+		globalMousePosition.y = 0.f;
+	}
+	//std::cout << globalMousePosition.x << " : " << globalMousePosition.y << std::endl;
+
+}
 
 //Rendering new frame of window
 void Game::render() 
@@ -106,22 +139,34 @@ void Game::render()
 	this->window->clear(sf::Color(0, 0, 0, 255));
 	
 	//Draw game objects
-	
 
+	
+	
+	
 	//kwadrat o usuniêcia
 	sf::RectangleShape rectangle(sf::Vector2f(200, 200)); // width: 200, height: 200
 	rectangle.setFillColor(sf::Color(0, 255, 0, 128)); // Green color with 50% transparency
 	rectangle.setPosition(300, 200); // Position the rectangle
 	this->window->draw(rectangle);
+	rectangle.setFillColor(sf::Color(66, 81, 168, 128)); // Green color with 50% transparency
+	rectangle.setPosition(125, 200); // Position the rectangle
+	this->window->draw(rectangle);
+
+
+
 	
+	
+	//gettin mouse position;
+	getMousePosition();
+
+	//drawing bullets
+	this->weapon->renderBullets(*this->window);
 
 	//player drawning
 	this->player->render(*this->window);
 
-	//kwadrat do usuniecia
-	rectangle.setFillColor(sf::Color(66, 81, 168, 128)); // Green color with 50% transparency
-	rectangle.setPosition(125, 200); // Position the rectangle
-	this->window->draw(rectangle);
+	
+
 	//displaying finall image
 	this->window->display();
 }

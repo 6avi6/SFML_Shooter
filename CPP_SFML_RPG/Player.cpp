@@ -1,15 +1,15 @@
 #include "Player.h"
 #include <iostream>
 
-void Player::initValues()
+void Player::initValues(sf::Vector2i windowSize=sf::Vector2i(0.f, 0.f))
 {
 	//player sizes
 	height = 2.f;
 	width = 2.f;
 
 	//position on map default center
-	positonX = 800 / 2;
-	positonY = 600 / 2;
+	 positonOfPlayer.x= windowSize.x / 2;
+	 positonOfPlayer.y = windowSize.y / 2;
 
 	//reading texture
 	if (!skinOfPlayer.loadFromFile("Assets/Textures/playerTexture.png"))
@@ -29,22 +29,36 @@ void Player::initValues()
 
 }
 
+Player::Player(const sf::Vector2i windowSize) {
+	this->initValues(windowSize);
+
+}
+
 Player::Player() {
 	this->initValues();
 
 }
-
 Player::~Player() 
 {
 
 }
 
 //method changing players positon on map
-void Player::changePosition(const float increasePositonX,const float increasePositonY)
+void Player::changePosition(const float increasePositonX,const float increasePositonY, sf::Vector2i windowSize)
 {
-	positonX += increasePositonX * this->speed;
-	positonY += increasePositonY * this->speed;
-		this->playerEntity.setPosition(positonX,positonY);
+	positonOfPlayer.x += increasePositonX * this->speed;
+	positonOfPlayer.y += increasePositonY * this->speed;
+
+	if (positonOfPlayer.x > windowSize.x)
+		positonOfPlayer.x = 0.f;
+	if (positonOfPlayer.y > windowSize.y)
+		positonOfPlayer.y = 0.f;
+	if (positonOfPlayer.x <0.f)
+		positonOfPlayer.x = windowSize.x;
+	if (positonOfPlayer.y <0.f)
+		positonOfPlayer.y = windowSize.y;
+
+		this->playerEntity.setPosition(positonOfPlayer.x, positonOfPlayer.y);
 	
 		
 }
@@ -52,6 +66,10 @@ void Player::changePosition(const float increasePositonX,const float increasePos
 //method rendering player entity in targeted window
 void Player::render(sf::RenderTarget& target)
 {
-	this->playerEntity.setPosition(positonX, positonY);
+	this->playerEntity.setPosition(positonOfPlayer.x, positonOfPlayer.y);
 	target.draw(this->playerEntity);
+}
+
+sf::Vector2i Player::getPlayerPostion() {
+	return positonOfPlayer;
 }

@@ -1,1 +1,2 @@
 C:\Users\Dawid\Desktop\RPG\CPP_SFML_RPG\Release\CPP_SFML_RPG.exe
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Release\CPP_SFML_RPG.exe

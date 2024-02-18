@@ -2,8 +2,13 @@
 
 #include "Game.h"
 
+#include "vector"
+
 int main()
 {
+    std::vector <int> vec = { 1,2,3 };
+    vec.erase(vec.begin());
+    
     Game game;
 
     //Main Game loop

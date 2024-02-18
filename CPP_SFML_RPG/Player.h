@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
+
 
 
 class Player {
@@ -18,22 +18,29 @@ private:
 	float height;
 
 	//position on map
-	float positonX;
-	float positonY;
 	
+	sf::Vector2i positonOfPlayer;
 	//attributes
 	int speed;
 	//inicialization all of values
-	void initValues();
+	void initValues(const sf::Vector2i windowSize);
 public:
 
 
+	
+	//constructors of player
+
+	//default spawns player at 0,0
 	Player();
+	//for attribute it need window size to spawn player on center of map
+	Player(sf::Vector2i windowSize);
+
+	//deconstructor
 	~Player();
 
-	void changePosition(const float increasePositonX,const float increasePositonY);
+	void changePosition(const float increasePositonX,const float increasePositonY, sf::Vector2i windowSize);
 	void render(sf::RenderTarget& target);
-
+	sf::Vector2i getPlayerPostion();
 
 };
 
