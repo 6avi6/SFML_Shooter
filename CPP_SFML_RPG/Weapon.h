@@ -9,10 +9,12 @@ private:
 	//weapon stats
 	int weaponSpeed;
 	
+	
+
+public:
 	//vector having all bullets
 	std::vector<sf::VertexArray> bullets;
 
-public:
 	//initialization of Variabels
 	void initVariabels();
 
@@ -23,7 +25,7 @@ public:
 	void renderBullets(sf::RenderTarget& window);
 
 	//geter of bullets
-	std::vector<sf::VertexArray> getBullets();
+	std::vector<sf::VertexArray>& getBullets();
 	Weapon();
 
 };

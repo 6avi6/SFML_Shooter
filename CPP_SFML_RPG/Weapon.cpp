@@ -35,6 +35,6 @@ void Weapon::renderBullets(sf::RenderTarget& window) {
 }
 
 //getter of bullets
-std::vector<sf::VertexArray> Weapon::getBullets() {
+std::vector<sf::VertexArray> & Weapon::getBullets() {
 	return bullets;
 }

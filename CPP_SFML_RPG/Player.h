@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 
 
 
@@ -13,6 +14,7 @@ private:
 	//drawable object/shape of player
 	sf::Sprite playerEntity;
 	
+	sf::RectangleShape shape;
 	//scale of enlargement
 	float width;
 	float height;
@@ -38,9 +40,15 @@ public:
 	//deconstructor
 	~Player();
 
-	void changePosition(const float increasePositonX,const float increasePositonY, sf::Vector2i windowSize);
+	void changePosition(const float increasePositonX,const float increasePositonY, sf::Vector2i windowSize, std::vector<sf::VertexArray> currentMap);
+	void setPosition(float x,float y);
 	void render(sf::RenderTarget& target);
 	sf::Vector2i getPlayerPostion();
+
+	const sf::RectangleShape& getShape() const;
+	const bool checkCollision();
+
+	void collisonDetection(const  sf::RenderTarget* window);
 
 };
 

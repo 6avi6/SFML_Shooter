@@ -2,13 +2,21 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
+//#include <SFML/System.hpp>
+//#include <SFML/Window.hpp>
+//#include <SFML/Audio.hpp>
+//#include <SFML/Network.hpp>
 
+//player class
 #include "Player.h"
+
+//weapon class
 #include "Weapon.h"
+
+//map class
+#include "Map.h"
+
+
 
 class Game {
 private:
@@ -40,6 +48,13 @@ private:
 	
 	//method that return positon of mouse max position is VideoMode.height and width and the lowest are 0
 	void getMousePosition();
+
+	Map* currentMap;
+	void loadMap(int mapNumber=0);
+	
+	
+
+
 public:
 
 	//Non argument Construstor;
