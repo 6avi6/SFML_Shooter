@@ -1,18 +1,18 @@
 #include "Player.h"
-#include <iostream>
+
 
 void Player::initValues(sf::Vector2i windowSize=sf::Vector2i(0.f, 0.f))
 {
 	//player sizes
-	height = 2.f;
-	width = 2.f;
+	this->height = 2.f;
+	this->width = 2.f;
 
 	//position on map default center
-	 positonOfPlayer.x= windowSize.x / 2;
-	 positonOfPlayer.y = windowSize.y / 2;
+	 this->positonOfPlayer.x= windowSize.x / 2;
+	 this->positonOfPlayer.y = windowSize.y / 2;
 
 	//reading texture
-	if (!skinOfPlayer.loadFromFile("Assets/Textures/playerTexture.png"))
+	if (!this->skinOfPlayer.loadFromFile("Assets/Textures/playerTexture.png"))
 	{
 		std::cout << "ERROR::PLAYER::initValues()::'loading texture of player'" << std::endl;
 	}
@@ -20,7 +20,7 @@ void Player::initValues(sf::Vector2i windowSize=sf::Vector2i(0.f, 0.f))
 		this->playerEntity.setTexture(this->skinOfPlayer);
 		
 		//resizeing player
-		this->playerEntity.scale(width, height);
+		this->playerEntity.scale(this->width, this->height);
 
 	}
 	

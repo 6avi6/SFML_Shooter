@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 
-
+#include <iostream>
 
 class Player {
 private:

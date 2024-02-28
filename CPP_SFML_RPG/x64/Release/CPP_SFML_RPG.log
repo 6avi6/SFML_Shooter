@@ -1,0 +1,12 @@
+﻿  CPP_SFML_RPG.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
+  Enemy.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Enemy.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
+  Game.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
+  Map.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
+  Player.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
+  Weapon.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Weapon.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory

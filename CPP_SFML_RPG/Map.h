@@ -42,11 +42,11 @@ private:
 	//if enemies were stored in:
 	//std::vector<Enemy>
 	//it will create white squre problem
-	std::vector<std::unique_ptr<Enemy>> enemies;
+	
 
 
 public:
-
+	std::vector<std::unique_ptr<Enemy>> enemies;
 
 	Map(int numberOfMap=0);
 	~Map();
@@ -62,7 +62,8 @@ public:
 
 	//adding new enemy with random cordinates
 	void addEnemy();
-	void checkIfEnemyHitted(std::vector <sf::VertexArray>& bullets);
+	int checkIfEnemyHitted(std::vector<sf::VertexArray>& bullets);
+	void checkIfWallHitted(std::vector<sf::VertexArray>& bullets);
 };
 
 

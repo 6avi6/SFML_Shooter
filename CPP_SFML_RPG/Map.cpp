@@ -81,62 +81,117 @@ void Map::addEnemy()
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	int min = 0;
+	std::uniform_int_distribution<> disX(0, 800 - 32); // Adjust range according to the size of your window and enemy
+	std::uniform_int_distribution<> disY(0, 600 - 64);
 
-	//max_x & max_y need to be change to be dynamic
-	int max_x = 800-32;//32=width of enemie
-	int max_y = 600-64;//64=heigt of enemie
-	std::uniform_int_distribution<> disX(min, max_x);
-	std::uniform_int_distribution<> disY(min, max_y);
-	int randomX = disX(gen);
-	int randomY = disY(gen);
+	bool enemyInWall;
+	float randomX = 0.f;
+	float randomY = 0.f;
 
-	//Creating new instance of enemy
-	auto newEnemy = std::make_unique<Enemy>(randomX, randomY);
+	do {
+		enemyInWall = false;
+		randomX = disX(gen);
+		randomY = disY(gen);
+		Enemy newEnemy(randomX, randomY);
+		// Check if the generated position is within any wall objects
+		for (const auto& wall : wallsObjects) {
+			if (wall.getBounds().intersects(newEnemy.getEnemyShape().getGlobalBounds())) {
+				enemyInWall = true;
+				break;
+			}
+		}
+	} while (enemyInWall);
 
-	// Adding enemy to vector 
-	enemies.push_back(std::move(newEnemy));
+	// Creating a new instance of an enemy
+	enemies.push_back(std::make_unique<Enemy>(randomX, randomY));
 	
 }
 
-void Map::checkIfEnemyHitted(std::vector<sf::VertexArray>& bullets)
+
+//if enemie is hitted delete that enemie and bullet whitch was hitted
+//return how many enemies was hitted
+int Map::checkIfEnemyHitted(std::vector<sf::VertexArray>& bullets)
 {
 	//Checkin if enemy was hitted
-
+	int howManyEnemiesHitted{0};
 	std::vector<int> enemiesToDelete;
 	std::vector<int> bulletsToDelete;
 	bool hitted = false;
 	// Check if enemy was hit
 	for (int e = 0; e < enemies.size(); e++) {
 		for (int b = 0; b < bullets.size(); b++) {
-			if (enemies[e]->getEnemyShape().getGlobalBounds().intersects(bullets[b].getBounds())) {
+			//it check collison of the tip of bullet with enemy
+			if (enemies[e]->getEnemyShape().getGlobalBounds().contains(bullets[b][0].position)) {
 				std::cout << "Hit"<<std::endl;
 				
 				// Mark enemy and bullet for deletion
-				enemiesToDelete.push_back(e);
+				
 				bulletsToDelete.push_back(b);
 				hitted = true;
 			}
+		}
+		if (hitted)
+		{	
+			enemiesToDelete.push_back(e);
+			hitted = false;
 		}
 	}
 
 	// Erase enemies marked for deletion
 	for (int i = enemiesToDelete.size() - 1; i >= 0; i--) {
-		enemies.erase(enemies.begin() + enemiesToDelete[i]);
+		//enemies.erase(enemies.begin() + enemiesToDelete[i]);
+		enemies.clear();
+		howManyEnemiesHitted++;
 	}
 
 	// Erase bullets marked for deletion
 	for (int i = bulletsToDelete.size() - 1; i >= 0; i--) {
-		//bullets.erase(bullets.begin() + bulletsToDelete[i]);
-		bullets.clear();
+		bullets.erase(bullets.begin() + bulletsToDelete[i]);
+		//bullets.clear();
+		
+	}
+	//If mob is dead it spawns new
+	if (!enemiesToDelete.empty()) { this->addEnemy(); }
+	
+		
+	return howManyEnemiesHitted;
+}
+
+//check if bullet hit wall if hit it will delet that bullet
+void Map::checkIfWallHitted(std::vector<sf::VertexArray>& bullets)
+{
+	
+	std::vector<int> bulletsToDelete;
+	
+	// Check if enemy was hit
+	for (int w = 0; w < wallsObjects.size(); w++) {
+		for (int b = 0; b < bullets.size(); b++) {
+			//it check collison of the tip of bullet with enemy
+			if (wallsObjects[w].getBounds().contains(bullets[b][0].position)) {
+				//std::cout << "Hit" << std::endl;
+
+				// Mark enemy and bullet for deletion
+
+				bulletsToDelete.push_back(b);
+				
+			}
+		}
 		
 	}
 
-	//If mob is dead it spawns new
-	if(hitted){ this->addEnemy(); }
-		
 	
+
+	// Erase bullets marked for deletion
+	for (int i = bulletsToDelete.size() - 1; i >= 0; i--) {
+		bullets.erase(bullets.begin() + bulletsToDelete[i]);
+		//bullets.clear();
+
+	}
+	
+
 }
+
+
 
 void Map::createTestMap() {
 	//crating new enemie
