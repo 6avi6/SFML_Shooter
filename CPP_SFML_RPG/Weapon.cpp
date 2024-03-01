@@ -6,10 +6,13 @@
 
 //initialization of variables
 void Weapon::initVariabels() {
-	weaponSpeed = 5;
-	weaponReload = 45;
-	weaponeRange = 1005.f;
+	this->weaponSpeed = 5;
+	this->weaponReload = 45;
+	this->weaponeRange = 1005.f;
 	this->weaponFired = false;
+	this->scaleOfBulletSprite.x = 4.f;
+	this->scaleOfBulletSprite.y = 4.f;
+	
 }
 
 void Weapon::loadTextures()
@@ -23,26 +26,36 @@ void Weapon::loadTextures()
 	else {
 		//setting sprite skin
 		this->bulletSkin.setTexture(weponTexture);
-
+		
 		//resizeing bullet
-		this->bulletSkin.scale(4.f, 4.f);
+		this->bulletSkin.scale(this->scaleOfBulletSprite.x, this->scaleOfBulletSprite.y);
+
+		//Setting center of bullet 
 		this->bulletSkin.setOrigin(this->bulletSkin.getLocalBounds().width / 2, 0.f);
 	}
 }
 
 //Weapon constructor
 Weapon::Weapon(){
-	this->loadTextures();
 	this->initVariabels();
+	this->loadTextures();
+	
 
 }
 
+//default deconstructor
+Weapon::~Weapon()
+{
+	
+
+}
+
+
 //method adding new bullets
-void Weapon::addNewBullet(sf::Vector2i positonOfPlayer, sf::Vector2i globalMousePosition) {
+void Weapon::addNewBullet(sf::Vector2f positonOfPlayer, sf::Vector2i globalMousePosition) {
     // Creating a line (VertexArray)
     sf::VertexArray bullet(sf::Lines, 2);
     bullet[0].position = sf::Vector2f(positonOfPlayer.x + 16.f, positonOfPlayer.y + 32.f); // Player position
-
     // Calculating the difference between mouse position and player position
     sf::Vector2f diff = sf::Vector2f(globalMousePosition) - bullet[0].position;
 
@@ -72,21 +85,20 @@ void Weapon::renderBullets(sf::RenderTarget& window) {
 		for (int i=0; i < bullets.size(); i++) {
 			
 			this->drawBullet(bullets[i]);
-			if (!(bullets[i][0].position.x > 800.f || bullets[i][0].position.x < 0.f || bullets[i][0].position.y>600.f || bullets[i][0].position.y < 0.f)) {
-
+			
+				
 			window.draw(bulletSkin);
 			//window.draw(bullets[i]);
-			}
-			else {
-			bullets.erase(bullets.begin() + i);
-			i--;
-		}
+			
+			
+		
 			
 		}
 	}
 	//window.draw(bulletSkin);
 }
 
+//drawing all bullets
 void Weapon::drawBullet(sf::VertexArray& bullet){
 	// Calculating the difference between mouse position and player position
 	sf::Vector2f diff = bullet[1].position - bullet[0].position;
@@ -95,19 +107,21 @@ void Weapon::drawBullet(sf::VertexArray& bullet){
 	float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);//pythagorean theorem x^2 +y^2=z^2
 	sf::Vector2f direction = diff / length;
 
-	// Setting the end position of the line to a fixed length of 100 units
+	// Setting the end position of the line
+	//there its moving from a player depending of weaponSpeed
 	bullet[0].position += direction * this->weaponSpeed;
 
 
 
-
+	
 	bulletSkin.setPosition(bullet[0].position);
 
 
-	//sf::Vector2f direction = bullet[1].position - bulletSkin.getPosition();
+	
 	// Calculate rotation angle in radians
 	float rotation = std::atan2(direction.y, direction.x) * 180 / M_PI;
 
+	//setting proper rotation to angle beetwen player and x axis
 	bulletSkin.setRotation(rotation + 90.f);
 
 }
@@ -116,4 +130,20 @@ void Weapon::drawBullet(sf::VertexArray& bullet){
 //getter of bullets
 std::vector<sf::VertexArray> & Weapon::getBullets() {
 	return bullets;
+}
+
+ //getter of reload property higher =faster weapon cooldown
+const float Weapon::getWeaponReloadStat() {
+
+	 return this->weaponReload;
+ }
+
+ //is used to told if player shot from weapon or not and if it need cooldown
+bool Weapon:: getWeaponWasFired() const{
+
+	 return this->weaponFired;
+ }
+void Weapon::setWeaponWasFired(bool statusOfWeapon) {
+
+	 this->weaponFired = statusOfWeapon;
 }

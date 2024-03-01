@@ -11,16 +11,29 @@ private:
 	float width;
 	float height;
 
+	//texture of the enemy 
 	sf::Texture enemyTexture;
-	
+
+	//object of enemy with texture
+	sf::Sprite enemyEntity;
+
+	//initialization of variables
 	void initEnemy();
 
 public:
-	sf::Sprite enemyEntity;
+	
+	//default enemy constructor spawns enemy on 0;0 corrdinates
 	Enemy();
+	//enemy constructor spawns enemy on corrdinates given as attributes x:y
 	Enemy(float x, float y);
+
+	//defualt deconstructor
 	~Enemy();
-	void render(sf::RenderTarget& target);
+
+	//method rendering on targetted window
+	void render(sf::RenderTarget& window);
+
+	//getter of enemy shape is used mainly to detect collison with bullet
 	const sf::Sprite getEnemyShape() ;
 	
 

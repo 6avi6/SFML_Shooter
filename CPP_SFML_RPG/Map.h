@@ -19,51 +19,58 @@
 
 class Map {
 private:
-	//sizes of map
-	sf::Vector2f map_size;
 
-	//vector with all non passable by player objects
-	std::vector <sf::VertexArray> wallsObjects;
+	//description fields of the current map//
 
-	//vector with all passable by player objects
-	std::vector <sf::Sprite> passableObjects;
+	int numberOfMap;//number of map identyfication that will be load
+	sf::Vector2f map_size;//sizes of map
+	std::vector <sf::VertexArray> wallsObjects;//vector with all non passable by player objects
+	std::vector <sf::Sprite> passableObjects;//vector with all passable by player objects
 
-	//number of map identyfication that will be load
-	int numberOfMap;
 
-	//method that will be read map from json file
+	//method that will be read map from json file !!TO DO!!
 	void loadMap();
-
-	//method to test later on delete
-	void createTestMap();
 
 	//vector saving all enemies
 	//it s neccesery to use smart pointers or pointers to add enemie on heap
 	//if enemies were stored in:
 	//std::vector<Enemy>
 	//it will create white squre problem
-	
-
-
-public:
 	std::vector<std::unique_ptr<Enemy>> enemies;
 
+
+	//method to test later on delete
+	void createTestMap();
+public:
+	
+
+	//Map construtor where numberOfMap is map that will be read
 	Map(int numberOfMap=0);
+
+	//deconstructor of map
 	~Map();
 	
-	//method drawing a map on screeon where window is a window were it will be generated
-	void drawMap(sf::RenderTarget& window);
-
 	//getter of all non passable objects
-	std::vector <sf::VertexArray> getWallObject();
+	std::vector <sf::VertexArray> getWallObject()const;
 
+
+	//enemy handling//
 	//adding new enemy where x and y are spawn cordinates
 	void addEnemy(float x, float y);
 
 	//adding new enemy with random cordinates
 	void addEnemy();
+
+	//if enemie is hitted delete that enemie and bullet whitch was hitted
+	//return how many enemies was hitted
 	int checkIfEnemyHitted(std::vector<sf::VertexArray>& bullets);
+
+	//check if bullet hit wall if hit it will delet that bullet
 	void checkIfWallHitted(std::vector<sf::VertexArray>& bullets);
+
+	//drawing current map
+	//firstly it drawing passable objects later on walls that can't player can go through
+	void drawMap(sf::RenderTarget& window);
 };
 
 

@@ -2,7 +2,7 @@
 
 void Map::loadMap() {
 	
-	this->map_size = sf::Vector2f(800.f, 600.f);
+	this->map_size = sf::Vector2f(1000.f, 800.f);
 	this->createTestMap();
 	
 
@@ -24,7 +24,7 @@ void Map::loadMap() {
 	}
 }
 
-//Map construtor
+//Map construtor where numberOfMap is map that will be read
 Map::Map(int numberOfMap){
 	this->numberOfMap = numberOfMap;
 	loadMap();
@@ -36,36 +36,8 @@ Map::~Map(){
 	passableObjects.clear();
 }
 
-//drawing current map
-//firstly it drawing passable objects later on walls that can't player can go through
-void Map::drawMap(sf::RenderTarget& window) {
-	
-	
-
-	//Drawing passable objects
-	if (!passableObjects.empty()) {
-		for (const auto& object : this->passableObjects) {
-			window.draw(object);
-		}
-	}
-	
-	//Drawing walls objects
-	if (!wallsObjects.empty()) {
-		for (const auto& object : this->wallsObjects) {
-			window.draw(object);
-		}
-	}
-	
-	//Drawing enemies Sprite
-	if (!enemies.empty()) {
-		for (int e = 0; e < enemies.size(); e++) {
-			window.draw(enemies[e]->enemyEntity);
-		}
-	}
-}
-
 //getter of walls is use to detect collisons
-std::vector <sf::VertexArray> Map::getWallObject() {
+std::vector <sf::VertexArray> Map::getWallObject()const {
 	return wallsObjects;
 }
 
@@ -116,46 +88,52 @@ int Map::checkIfEnemyHitted(std::vector<sf::VertexArray>& bullets)
 	int howManyEnemiesHitted{0};
 	std::vector<int> enemiesToDelete;
 	std::vector<int> bulletsToDelete;
-	bool hitted = false;
+	
 	// Check if enemy was hit
 	for (int e = 0; e < enemies.size(); e++) {
 		for (int b = 0; b < bullets.size(); b++) {
 			//it check collison of the tip of bullet with enemy
 			if (enemies[e]->getEnemyShape().getGlobalBounds().contains(bullets[b][0].position)) {
-				std::cout << "Hit"<<std::endl;
+				//std::cout << "Hit"<<std::endl;
 				
 				// Mark enemy and bullet for deletion
-				
+				enemiesToDelete.push_back(e);
 				bulletsToDelete.push_back(b);
-				hitted = true;
+				
 			}
 		}
-		if (hitted)
-		{	
-			enemiesToDelete.push_back(e);
-			hitted = false;
-		}
+		
 	}
 
 	// Erase enemies marked for deletion
 	for (int i = enemiesToDelete.size() - 1; i >= 0; i--) {
-		//enemies.erase(enemies.begin() + enemiesToDelete[i]);
-		enemies.clear();
-		howManyEnemiesHitted++;
+		int index = enemiesToDelete[i];
+		if (index < enemies.size()) {
+			enemies.erase(enemies.begin() + index);
+			howManyEnemiesHitted++;
+		}
 	}
 
 	// Erase bullets marked for deletion
 	for (int i = bulletsToDelete.size() - 1; i >= 0; i--) {
-		bullets.erase(bullets.begin() + bulletsToDelete[i]);
-		//bullets.clear();
-		
+		int index = bulletsToDelete[i];
+		if (index < bullets.size()) {
+			bullets.erase(bullets.begin() + index);
+		}
 	}
+
 	//If mob is dead it spawns new
-	if (!enemiesToDelete.empty()) { this->addEnemy(); }
-	
-		
+	if (!enemiesToDelete.empty()) { 
+		for (int i = 0;i< enemiesToDelete.size();i++)
+		this->addEnemy(); 
+	}
+	enemiesToDelete.clear();
+	bulletsToDelete.clear();
+
+
 	return howManyEnemiesHitted;
 }
+
 
 //check if bullet hit wall if hit it will delet that bullet
 void Map::checkIfWallHitted(std::vector<sf::VertexArray>& bullets)
@@ -165,9 +143,12 @@ void Map::checkIfWallHitted(std::vector<sf::VertexArray>& bullets)
 	
 	// Check if enemy was hit
 	for (int w = 0; w < wallsObjects.size(); w++) {
+		
 		for (int b = 0; b < bullets.size(); b++) {
+			
+
 			//it check collison of the tip of bullet with enemy
-			if (wallsObjects[w].getBounds().contains(bullets[b][0].position)) {
+			if (wallsObjects[w].getBounds().contains(bullets[b][0].position) ){
 				//std::cout << "Hit" << std::endl;
 
 				// Mark enemy and bullet for deletion
@@ -178,30 +159,77 @@ void Map::checkIfWallHitted(std::vector<sf::VertexArray>& bullets)
 		}
 		
 	}
+		// Check if bullet hitted wall
+		
+			for (int b = 0; b < bullets.size(); b++) {
 
-	
 
+				//it check collison of the tip of bullet with enemy
+				if (bullets[b][0].position.x > this->map_size.x || bullets[b][0].position.x < 0.f || bullets[b][0].position.y>this->map_size.y || bullets[b][0].position.y < 0.f) {
+					std::cout << "Hit " << std::endl;
+
+					// Mark enemy and bullet for deletion
+
+					bulletsToDelete.push_back(b);
+
+				}
+			}
+
+		
 	// Erase bullets marked for deletion
+	
 	for (int i = bulletsToDelete.size() - 1; i >= 0; i--) {
-		bullets.erase(bullets.begin() + bulletsToDelete[i]);
-		//bullets.clear();
-
+		int index = bulletsToDelete[i];
+		if (index < bullets.size()&& !bullets.empty()) {
+			bullets.erase(bullets.begin() + index);
+		}
 	}
 	
 
 }
 
 
+//drawing current map
+//firstly it drawing passable objects later on walls that can't player can go through
+void Map::drawMap(sf::RenderTarget& window) {
 
+
+
+	//Drawing passable objects
+	if (!passableObjects.empty()) {
+		for (const auto& object : this->passableObjects) {
+			window.draw(object);
+		}
+	}
+
+	//Drawing walls objects
+	if (!wallsObjects.empty()) {
+		for (const auto& object : this->wallsObjects) {
+			window.draw(object);
+		}
+	}
+
+	//Drawing enemies Sprite
+	if (!enemies.empty()) {
+		for (int e = 0; e < enemies.size(); e++) {
+			window.draw(enemies[e]->getEnemyShape());
+		}
+	}
+}
+
+
+
+
+
+//method to test later on delete
 void Map::createTestMap() {
-	//crating new enemie
-	this->addEnemy();
+	
 	// Define the rectangle's position, size, and color
 	sf::Vector2f position(100.f, 100.f);
 	sf::Vector2f size(200.f, 100.f);
 	sf::Color color = sf::Color::Red;
 	sf::VertexArray rectangle(sf::Quads, 4);
-	
+
 	rectangle[0].position = position;
 	rectangle[1].position = position + sf::Vector2f(size.x, 0.f);
 	rectangle[2].position = position + size;
@@ -248,7 +276,7 @@ void Map::createTestMap() {
 	wallsObjects.push_back(rectangle);
 
 	position = sf::Vector2f(250.f, 300.f);
-	
+
 	size = sf::Vector2f(150.f, 150.f);
 	color = sf::Color(255, 0, 255, 200);
 
@@ -260,11 +288,20 @@ void Map::createTestMap() {
 	for (int i = 0; i < 4; ++i) {
 		rectangle[i].color = color;
 	}
-	
+
 	//
 	//here will be section that will serialaize maps
 	//
 
 	//adding objects to passable vector
 	wallsObjects.push_back(rectangle);
+
+
+
+	//crating new enemie
+	this->addEnemy();
+	this->addEnemy();
+	this->addEnemy();
+	this->addEnemy();
+	this->addEnemy();
 }

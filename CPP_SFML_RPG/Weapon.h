@@ -8,40 +8,56 @@
 
 class Weapon {
 private:
-	//weapon stats
+	//weapon stats//
 	
-	float weaponeRange;
+	float weaponeRange;//how far from player weapon can deal damege
+	float weaponSpeed;//e.g how fast nullet should be 
+	float weaponReload;//lvl of how fast weapon can be used again
+	bool weaponFired;//if weapon is cooling down or not/if is reloaded or empyt chamber 
 	
-	//weapon skins
-	sf::Texture weponTexture;
+
+	//bullet looks//
 	
-	
+	sf::Vector2f scaleOfBulletSprite;//how big it is
+	sf::Texture weponTexture;//weapon skins
+	sf::Sprite bulletSkin;//drwable object of bullet
+
+
+	std::vector<sf::VertexArray> bullets;//vector having all bullets
+
+
 	//initialization of Variabels
 	void initVariabels();
 
 	//loading texture of bulets
 	void loadTextures();
+
 public:
-	//vector having all bullets
-	std::vector<sf::VertexArray> bullets;
-
-	sf::Sprite bulletSkin;
-
-	bool weaponFired;
-	float weaponSpeed;
-	float weaponReload;
-	void drawBullet(sf::VertexArray& bullet);
-
-	//adding new bullet
-	void addNewBullet(sf::Vector2i positonOfPlayer, sf::Vector2i globalMousePosition);
 	
-	//drawing bullets
-	void renderBullets(sf::RenderTarget& window);
-
-	//geter of bullets
-	std::vector<sf::VertexArray>& getBullets();
+	//default constructor 
 	Weapon();
 
+	//default deconstructor 
+	~Weapon();
+
+
+	 //adding new bullet
+	 void addNewBullet(sf::Vector2f positonOfPlayer, sf::Vector2i globalMousePosition);
+	
+	 void drawBullet(sf::VertexArray& bullet);
+
+	 //drawing all bullets
+	 void renderBullets(sf::RenderTarget& window);
+
+	 //getter of bullets
+	 std::vector<sf::VertexArray>& getBullets();
+
+	 //getter of reload property higher =faster weapon cooldown
+	 const float getWeaponReloadStat();
+
+	 //is used to told if player shot from weapon or not and if it need cooldown
+	 bool getWeaponWasFired()const ;
+	 void setWeaponWasFired(bool statusOfWeapon);
 };
 
 #endif // !WEAPON_H

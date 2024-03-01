@@ -25,56 +25,52 @@
 class Game {
 private:
 
-	//game variables
-	//window size 
-	sf::Vector2i windowSize;
-	//window object wherein will be game
-	sf::RenderWindow* window;
-	//setting of window display like fullscreen/not or size of screen
-	sf::VideoMode videoMode;
-	//event listener for input of user
-	sf::Event event;
-	//use for changing quality of image
-	sf::ContextSettings settings;
+	//window fields//
 
-	int counter;
-	//vector with mouse x & y corrdinates
-	sf::Vector2i globalMousePosition;
-	//Player Variabels
-	Player* player;
+	sf::Vector2i windowSize;	//window size 
+	sf::RenderWindow* window;	//window object wherein will be game
+	sf::VideoMode videoMode;	//setting of window display like fullscreen/not or size of screen
+	sf::Event event;	//event listener for input of user
+	sf::ContextSettings settings;//use for changing quality of image
 
-	//init player
-	void initPlayer();
-
-	//Init weapon
-	Weapon* weapon;
-	void initWeapon();
-
-	//Private functions
-	void initVariables();
+	//init variables
+	void initVariables(); 
+	//init window with game
 	void initWindow();
+	//lisiner listener of user inputs
 	void pollEvents();
 	
+	//vector with mouse x & y corrdinates
+	sf::Vector2i globalMousePosition;
 	//method that return positon of mouse max position is VideoMode.height and width and the lowest are 0
 	void getMousePosition();
 
-	Map* currentMap;
+	//Player Variabels
+	Player* player;//player
+	int	weaponCounter;//used to calc reload time
+	//init player
+	void initPlayer();
+
+	//weapon//
+	Weapon* weapon;//wepon
+	//initializer weapon
+	void initWeapon();
+
+	//map//
+	Map* currentMap;//current map of game
+	//map initializer
 	void loadMap(int mapNumber=0);
 	
-	//fonts 
 
+	//fonts//
+	sf::Font fontSlkscr;//storing font named:SlKscr
+	sf::Text scorePoints;//Text with number of score that will be displayed in game
 	//init fonts read from file
 	void initFonts();
 
-	//font named:SlKscr
-	sf::Font fontSlkscr;
-
-	//Text with number of score that will be displayed in game
-	sf::Text scorePoints;
 	
 	//how many enemies was killed
 	int score;
-
 
 public:
 

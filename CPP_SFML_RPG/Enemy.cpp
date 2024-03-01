@@ -29,23 +29,25 @@ Enemy::Enemy(){
 	this->initEnemy();
 }
 
-
-
+//enemy constructor spawns enemy on corrdinates given as attributes x:y
 Enemy::Enemy(float x, float y)
 {	
 	this->initEnemy();
 	this->enemyEntity.setPosition(x,y);
 }
 
+//defualt deconstructor
 Enemy::~Enemy(){
 	
 }
 
-void Enemy::render(sf::RenderTarget& target) {
+//method rendering on targetted window
+void Enemy::render(sf::RenderTarget& window) {
 
-	target.draw(this->enemyEntity);
+	window.draw(this->enemyEntity);
 }
 
+//getter of enemy shape is used mainly to detect collison with bullet
 const sf::Sprite Enemy::getEnemyShape()
 {
 	return this->enemyEntity;
