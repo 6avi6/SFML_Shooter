@@ -5,9 +5,9 @@
 #define M_PI 3.14159265358979323846
 
 //initialization of variables
-void Weapon::initVariabels() {
-	this->weaponSpeed = 5;
-	this->weaponReload = 45;
+void Weapon::initVariabels(float weaponSpeed, float weaponReload) {
+	this->weaponSpeed = weaponSpeed;
+	this->weaponReload = weaponReload;
 	this->weaponeRange = 1005.f;
 	this->weaponFired = false;
 	this->scaleOfBulletSprite.x = 4.f;
@@ -36,8 +36,8 @@ void Weapon::loadTextures()
 }
 
 //Weapon constructor
-Weapon::Weapon(){
-	this->initVariabels();
+Weapon::Weapon(float weaponSpeed,float weaponReload){
+	this->initVariabels(weaponSpeed, weaponReload);
 	this->loadTextures();
 	
 
@@ -52,10 +52,10 @@ Weapon::~Weapon()
 
 
 //method adding new bullets
-void Weapon::addNewBullet(sf::Vector2f positonOfPlayer, sf::Vector2i globalMousePosition) {
+void Weapon::addNewBullet(sf::Vector2f gunHolder, sf::Vector2i globalMousePosition) {
     // Creating a line (VertexArray)
     sf::VertexArray bullet(sf::Lines, 2);
-    bullet[0].position = sf::Vector2f(positonOfPlayer.x + 16.f, positonOfPlayer.y + 32.f); // Player position
+    bullet[0].position = sf::Vector2f(gunHolder.x + 16.f, gunHolder.y + 32.f); // Player position
     // Calculating the difference between mouse position and player position
     sf::Vector2f diff = sf::Vector2f(globalMousePosition) - bullet[0].position;
 

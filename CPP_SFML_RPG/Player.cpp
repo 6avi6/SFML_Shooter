@@ -37,10 +37,15 @@ Player::Player()
 	this->initValues();
 }
 
+//creating new weapon
+void Player::initWeapon() {
+	this->weapon = new Weapon(8.f,45.f);
+}
+
 //constructor that spawns player on center of screen
 Player::Player(const sf::Vector2i windowSize) {
 	this->initValues(windowSize);
-
+	this->initWeapon();
 }
 
 //default deconstructor
@@ -107,3 +112,5 @@ void Player::render(sf::RenderTarget& window)
 	this->playerEntity.setPosition(this->positonOfPlayer.x, this->positonOfPlayer.y);
 	window.draw(this->playerEntity);
 }
+
+

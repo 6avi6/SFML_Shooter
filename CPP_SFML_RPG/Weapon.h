@@ -27,7 +27,7 @@ private:
 
 
 	//initialization of Variabels
-	void initVariabels();
+	void initVariabels(float weaponSpeed, float weaponReload);
 
 	//loading texture of bulets
 	void loadTextures();
@@ -35,14 +35,14 @@ private:
 public:
 	
 	//default constructor 
-	Weapon();
+	Weapon(float weaponSpeed, float weaponReload);
 
 	//default deconstructor 
 	~Weapon();
 
 
 	 //adding new bullet
-	 void addNewBullet(sf::Vector2f positonOfPlayer, sf::Vector2i globalMousePosition);
+	 void addNewBullet(sf::Vector2f gunHolder, sf::Vector2i target);
 	
 	 void drawBullet(sf::VertexArray& bullet);
 

@@ -149,7 +149,7 @@ void Map::checkIfWallHitted(std::vector<sf::VertexArray>& bullets)
 
 			//it check collison of the tip of bullet with enemy
 			if (wallsObjects[w].getBounds().contains(bullets[b][0].position) ){
-				//std::cout << "Hit" << std::endl;
+				
 
 				// Mark enemy and bullet for deletion
 
@@ -166,8 +166,7 @@ void Map::checkIfWallHitted(std::vector<sf::VertexArray>& bullets)
 
 				//it check collison of the tip of bullet with enemy
 				if (bullets[b][0].position.x > this->map_size.x || bullets[b][0].position.x < 0.f || bullets[b][0].position.y>this->map_size.y || bullets[b][0].position.y < 0.f) {
-					std::cout << "Hit " << std::endl;
-
+					
 					// Mark enemy and bullet for deletion
 
 					bulletsToDelete.push_back(b);
@@ -187,6 +186,32 @@ void Map::checkIfWallHitted(std::vector<sf::VertexArray>& bullets)
 	
 
 }
+
+int Map::checkIfPlayerHitted(sf::Sprite player)
+{
+	int howManyTimesPlayerHitted = 0;
+
+	for (int e = 0; e < enemies.size(); e++) {
+		std::vector<sf::VertexArray>& bullets = enemies[e]->weapon->getBullets();
+		std::vector<int> bulletsToDelete;
+
+		for (int i = 0; i < bullets.size(); i++) {
+			if (player.getGlobalBounds().contains(bullets[i][0].position)) {
+				bulletsToDelete.push_back(i);
+				howManyTimesPlayerHitted++;
+			}
+		}
+
+		// Erase bullets marked for deletion (backward iteration)
+		for (int i = bulletsToDelete.size() - 1; i >= 0; i--) {
+			int index = bulletsToDelete[i];
+			bullets.erase(bullets.begin() + index);
+		}
+	}
+
+	return howManyTimesPlayerHitted;
+}
+
 
 
 //drawing current map
@@ -213,6 +238,7 @@ void Map::drawMap(sf::RenderTarget& window) {
 	if (!enemies.empty()) {
 		for (int e = 0; e < enemies.size(); e++) {
 			window.draw(enemies[e]->getEnemyShape());
+			enemies[e]->weapon->renderBullets(window);
 		}
 	}
 }

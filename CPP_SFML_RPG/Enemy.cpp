@@ -20,8 +20,14 @@ void Enemy::initEnemy() {
 
 	}
 	
+	
+	this->initWeapon();
+}
 
-
+//creating new weapon
+void Enemy::initWeapon() {
+	
+	this->weapon = new Weapon(4.f,20.f);
 }
 
 //default constructor

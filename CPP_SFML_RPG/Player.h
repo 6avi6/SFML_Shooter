@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "Weapon.h"
 class Player {
 private:
 	//player look//
@@ -24,7 +25,14 @@ private:
 	//inicialization all of values
 	void initValues(const sf::Vector2i windowSize);
 
+
 public:
+
+	//weapon//
+	Weapon* weapon;//wepon
+	//initializer weapon
+	void initWeapon();
+
 
 	//default spawns player at 0,0
 	Player();

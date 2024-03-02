@@ -2,7 +2,8 @@
 #define ENEMY_H
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
+#include "Weapon.h"
+
 
 class Enemy {
 private:
@@ -22,6 +23,12 @@ private:
 
 public:
 	
+	//weapon//
+	Weapon* weapon;//wepon
+	//initializer weapon
+	void initWeapon();
+
+
 	//default enemy constructor spawns enemy on 0;0 corrdinates
 	Enemy();
 	//enemy constructor spawns enemy on corrdinates given as attributes x:y

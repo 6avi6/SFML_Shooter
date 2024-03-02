@@ -12,7 +12,8 @@ void Game::initVariables()
 	//displayed quality higher = better
 	this->settings.antialiasingLevel = 8;
 	
-	this->weaponCounter = 0;
+	this->weaponCounterPlayer = 0;
+	this->weaponCounterEnemie = 0;
 }
 
 //setting window attribs
@@ -66,10 +67,10 @@ void Game::pollEvents()
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		// left mouse button is pressed: shoot
-		if (!this->weapon->getWeaponWasFired())
+		if (!this->player->weapon->getWeaponWasFired())
 		{
-			this->weapon->addNewBullet(this->player->getPlayerPostion(), this->globalMousePosition);
-			this->weapon->setWeaponWasFired(true);
+			this->player->weapon->addNewBullet(this->player->getPlayerPostion(), this->globalMousePosition);
+			this->player->weapon->setWeaponWasFired(true);
 		}
 
 		//logs how with player score
@@ -110,10 +111,6 @@ void Game::initPlayer()
 	player = new Player(this->windowSize);
 }
 
-//creating new weapon
-void Game::initWeapon() {
-	this->weapon = new Weapon();
-}
 
 //void Game
 void Game::loadMap(int mapNumber) {
@@ -147,7 +144,6 @@ Game::Game()
 	this->initVariables();
 	this->initWindow();
 	this->initPlayer();
-	this->initWeapon();
 	this->loadMap();
 	this->initFonts();
 	
@@ -158,7 +154,6 @@ Game::~Game()
 {
 	delete this->window;
 	delete this->player;
-	delete this->weapon;
 	delete this->currentMap;
 	
 }
@@ -183,14 +178,55 @@ void Game::update()
 void Game::render() 
 {	
 	
-	if(this->weapon->getWeaponWasFired() )
-		this->weaponCounter++;
+	if(this->player->weapon->getWeaponWasFired() )
+		this->weaponCounterPlayer++;
 		
-	if (this->weaponCounter == 60 - this->weapon->getWeaponReloadStat()) {
-		this->weaponCounter = 0;
-		this->weapon->setWeaponWasFired(false);
+	if (this->weaponCounterPlayer == 60 - this->player->weapon->getWeaponReloadStat()) {
+		this->weaponCounterPlayer = 0;
+		this->player->weapon->setWeaponWasFired(false);
 	}
+
+	
+	//enemie fighting back
+	if(!this->currentMap->enemies.empty())
+	for (int e = 0; e < this->currentMap->enemies.size(); e++) {
+		if (this->currentMap->enemies[e]->weapon->getWeaponWasFired())
+			this->weaponCounterEnemie++;
+
+		if (this->weaponCounterEnemie == 200 - this->currentMap->enemies[e]->weapon->getWeaponReloadStat()) {
+			this->weaponCounterEnemie = 0;
+			this->currentMap->enemies[e]->weapon->setWeaponWasFired(false);
+		}
+		if (!this->currentMap->enemies[e]->weapon->getWeaponWasFired())
+		{
+			this->currentMap->enemies[e]->weapon->addNewBullet(this->currentMap->enemies[e]->getEnemyShape().getPosition(),sf::Vector2i(this->player->getPlayerPostion().x, this->player->getPlayerPostion().y) );
+			this->currentMap->enemies[e]->weapon->setWeaponWasFired(true);
+		}
+
+	}
+	
+
+	for (int e = 0; e < this->currentMap->enemies.size(); e++) {
 		
+		this->currentMap->checkIfWallHitted((this->currentMap->enemies[e]->weapon->getBullets()));
+		
+	}
+
+	score -= this->currentMap->checkIfPlayerHitted((this->player->getShape()));
+
+
+	if (score > 10) {
+
+		std::cout << "You win ;)" << std::endl;
+		this->window->close();
+	}
+	if ( score < -10) {
+
+		std::cout << "You Lose :(" << std::endl;
+		this->window->close();
+	}
+
+
 
 	//Clearing old frame
 	this->window->clear(sf::Color(0, 0, 0, 255));
@@ -203,8 +239,9 @@ void Game::render()
 	//Draw map & enemies
 	this->currentMap->drawMap(*this->window);
 
+	
 	//drawing bullets
-	this->weapon->renderBullets(*this->window);
+	this->player->weapon->renderBullets(*this->window);
 
 	//player drawning
 	this->player->render(*this->window);
@@ -212,10 +249,10 @@ void Game::render()
 
 
 	//collison detecion and handling bullet with enemy if enemy was kiled return how many enemies was killed and adding that number to score
-	this->score += (this->currentMap->checkIfEnemyHitted((this->weapon->getBullets())));
+	this->score += (this->currentMap->checkIfEnemyHitted((this->player->weapon->getBullets())));
 
 	//collison detecion and handling bullet with walls if hitted delete that bullet
-	this->currentMap->checkIfWallHitted((this->weapon->getBullets()));
+	this->currentMap->checkIfWallHitted((this->player->weapon->getBullets()));
 
 	//setting new score
 	this->scorePoints.setString("Score: " + std::to_string(this->score));

@@ -36,14 +36,14 @@ private:
 	//if enemies were stored in:
 	//std::vector<Enemy>
 	//it will create white squre problem
-	std::vector<std::unique_ptr<Enemy>> enemies;
+	
 
 
 	//method to test later on delete
 	void createTestMap();
 public:
 	
-
+	std::vector<std::unique_ptr<Enemy>> enemies;
 	//Map construtor where numberOfMap is map that will be read
 	Map(int numberOfMap=0);
 
@@ -67,6 +67,8 @@ public:
 
 	//check if bullet hit wall if hit it will delet that bullet
 	void checkIfWallHitted(std::vector<sf::VertexArray>& bullets);
+	
+	int checkIfPlayerHitted(sf::Sprite player);
 
 	//drawing current map
 	//firstly it drawing passable objects later on walls that can't player can go through

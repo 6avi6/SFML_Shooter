@@ -1,24 +1,16 @@
-﻿  CPP_SFML_RPG.cpp
-  Game.cpp
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(7,23): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
-          with
-          [
-              T=int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(8,23): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
-          with
-          [
-              T=int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(94,33): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
-          with
-          [
-              T=int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(100,33): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
-          with
-          [
-              T=int
-          ]
-  Generowanie kodu...
+﻿  Map.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(65,17): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(66,17): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(93,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(94,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(111,13): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(120,13): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(127,19): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(145,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(147,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(164,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(182,13): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(194,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(198,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.cpp(239,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   CPP_SFML_RPG.vcxproj -> C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Debug\CPP_SFML_RPG.exe
