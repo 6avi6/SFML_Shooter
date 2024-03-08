@@ -24,7 +24,7 @@
 
 class Game {
 private:
-
+	bool gamePlayed;
 	//window fields//
 
 	sf::Vector2i windowSize;	//window size 
@@ -72,7 +72,7 @@ private:
 public:
 
 	//Non argument Construstor;
-	Game();
+	Game(sf::RenderWindow* window);
 	//Non argument deconstructor
 	virtual ~Game();
 

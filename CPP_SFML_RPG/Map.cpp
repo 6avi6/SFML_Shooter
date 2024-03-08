@@ -79,63 +79,7 @@ void Map::addEnemy()
 	
 }
 
-
-//if enemie is hitted delete that enemie and bullet whitch was hitted
-//return how many enemies was hitted
-int Map::checkIfEnemyHitted(std::vector<sf::VertexArray>& bullets)
-{
-	//Checkin if enemy was hitted
-	int howManyEnemiesHitted{0};
-	std::vector<int> enemiesToDelete;
-	std::vector<int> bulletsToDelete;
-	
-	// Check if enemy was hit
-	for (int e = 0; e < enemies.size(); e++) {
-		for (int b = 0; b < bullets.size(); b++) {
-			//it check collison of the tip of bullet with enemy
-			if (enemies[e]->getEnemyShape().getGlobalBounds().contains(bullets[b][0].position)) {
-				//std::cout << "Hit"<<std::endl;
-				
-				// Mark enemy and bullet for deletion
-				enemiesToDelete.push_back(e);
-				bulletsToDelete.push_back(b);
-				
-			}
-		}
-		
-	}
-
-	// Erase enemies marked for deletion
-	for (int i = enemiesToDelete.size() - 1; i >= 0; i--) {
-		int index = enemiesToDelete[i];
-		if (index < enemies.size()) {
-			enemies.erase(enemies.begin() + index);
-			howManyEnemiesHitted++;
-		}
-	}
-
-	// Erase bullets marked for deletion
-	for (int i = bulletsToDelete.size() - 1; i >= 0; i--) {
-		int index = bulletsToDelete[i];
-		if (index < bullets.size()) {
-			bullets.erase(bullets.begin() + index);
-		}
-	}
-
-	//If mob is dead it spawns new
-	if (!enemiesToDelete.empty()) { 
-		for (int i = 0;i< enemiesToDelete.size();i++)
-		this->addEnemy(); 
-	}
-	enemiesToDelete.clear();
-	bulletsToDelete.clear();
-
-
-	return howManyEnemiesHitted;
-}
-
-
-//check if bullet hit wall if hit it will delet that bullet
+//check if bullet hit wall if hit it will delete that bullet
 void Map::checkIfWallHitted(std::vector<sf::VertexArray>& bullets)
 {
 	
@@ -149,7 +93,6 @@ void Map::checkIfWallHitted(std::vector<sf::VertexArray>& bullets)
 
 			//it check collison of the tip of bullet with enemy
 			if (wallsObjects[w].getBounds().contains(bullets[b][0].position) ){
-				
 
 				// Mark enemy and bullet for deletion
 
@@ -161,18 +104,18 @@ void Map::checkIfWallHitted(std::vector<sf::VertexArray>& bullets)
 	}
 		// Check if bullet hitted wall
 		
-			for (int b = 0; b < bullets.size(); b++) {
+	for (int b = 0; b < bullets.size(); b++) {
 
 
-				//it check collison of the tip of bullet with enemy
-				if (bullets[b][0].position.x > this->map_size.x || bullets[b][0].position.x < 0.f || bullets[b][0].position.y>this->map_size.y || bullets[b][0].position.y < 0.f) {
+		//it check collison of the tip of bullet with enemy
+		if (bullets[b][0].position.x > this->map_size.x || bullets[b][0].position.x < 0.f || bullets[b][0].position.y>this->map_size.y || bullets[b][0].position.y < 0.f) {
 					
-					// Mark enemy and bullet for deletion
+		// Mark enemy and bullet for deletion
 
-					bulletsToDelete.push_back(b);
+		bulletsToDelete.push_back(b);
 
-				}
-			}
+		}
+	}
 
 		
 	// Erase bullets marked for deletion
@@ -187,16 +130,17 @@ void Map::checkIfWallHitted(std::vector<sf::VertexArray>& bullets)
 
 }
 
-int Map::checkIfPlayerHitted(sf::Sprite player)
-{
+
+//returning 1 if target was hitted by bullets and return 0 if wasn't hitted
+int Map::checkIfTargetIsHittedByBullets(sf::Sprite target, std::vector<sf::VertexArray>& bulletsShootedToTarget) {
 	int howManyTimesPlayerHitted = 0;
 
 	for (int e = 0; e < enemies.size(); e++) {
-		std::vector<sf::VertexArray>& bullets = enemies[e]->weapon->getBullets();
+		
 		std::vector<int> bulletsToDelete;
 
-		for (int i = 0; i < bullets.size(); i++) {
-			if (player.getGlobalBounds().contains(bullets[i][0].position)) {
+		for (int i = 0; i < bulletsShootedToTarget.size(); i++) {
+			if (target.getGlobalBounds().contains(bulletsShootedToTarget[i][0].position)) {
 				bulletsToDelete.push_back(i);
 				howManyTimesPlayerHitted++;
 			}
@@ -205,14 +149,16 @@ int Map::checkIfPlayerHitted(sf::Sprite player)
 		// Erase bullets marked for deletion (backward iteration)
 		for (int i = bulletsToDelete.size() - 1; i >= 0; i--) {
 			int index = bulletsToDelete[i];
-			bullets.erase(bullets.begin() + index);
+			bulletsShootedToTarget.erase(bulletsShootedToTarget.begin() + index);
 		}
+
+		//checking if enemies bullet is outside of map if yes then delete that bullet
+		this->checkIfWallHitted(bulletsShootedToTarget);
 	}
 
 	return howManyTimesPlayerHitted;
+	
 }
-
-
 
 //drawing current map
 //firstly it drawing passable objects later on walls that can't player can go through

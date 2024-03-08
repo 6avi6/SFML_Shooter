@@ -1,25 +1,13 @@
 ﻿#include <iostream>
 
-#include "Game.h"
+#include "Screens.h"
 
-#include "vector"
+Screens window;
 
 int main()
 {
-    std::vector <int> vec = { 1,2,3 };
-    vec.erase(vec.begin());
+    window.Start();
     
-    Game game;
-
-    //Main Game loop
-    while (game.running()) {
-
-       //Read input information keyboard mouse etc
-        game.update();
-
-        //Render new frame
-        game.render();
-    }
 
     return 0;
 }

@@ -2,7 +2,8 @@
 
 void Game::initVariables() 
 {
-	this -> window = nullptr;
+	
+	//this -> window = nullptr;
 	//window size
 	this->windowSize.x = 1000.f;
 	this->windowSize.y = 800.f;
@@ -10,10 +11,11 @@ void Game::initVariables()
 	this->videoMode.width = windowSize.x;
 	
 	//displayed quality higher = better
-	this->settings.antialiasingLevel = 8;
+	//this->settings.antialiasingLevel = 8;
 	
 	this->weaponCounterPlayer = 0;
 	this->weaponCounterEnemie = 0;
+	this->gamePlayed = true;
 }
 
 //setting window attribs
@@ -21,10 +23,10 @@ void Game::initWindow()
 {
 
 	//settings of window
-	this->window = new sf::RenderWindow(videoMode, "Game Window",sf::Style::Titlebar | sf::Style::Close,settings);
+	//this->window = new sf::RenderWindow(videoMode, "Game Window",sf::Style::Titlebar | sf::Style::Close,settings);
 
 	//frame rate per second limitation
-	this->window->setFramerateLimit(60);
+	//this->window->setFramerateLimit(60);
 }
 
 //lisiner listener of user inputs
@@ -44,7 +46,7 @@ void Game::pollEvents()
 		case sf::Event::KeyPressed:
 
 			if (this->event.key.code == sf::Keyboard::Escape) //closing after clickin ESC key
-				this->window->close();
+				this->gamePlayed = false;
 
 			break;
 		}
@@ -118,11 +120,11 @@ void Game::loadMap(int mapNumber) {
 }
 
 //loading font and init default text communicats
-void Game::initFonts(){
-	
+void Game::initFonts() {
+
 	if (!this->fontSlkscr.loadFromFile("Assets/Fonts/Silkscreen/slkscr.ttf"))
 	{
-		std::cout<<"ERROR::GAME::initFonts()::'couldn't load font slkscr.ttf" << std::endl;
+		std::cout << "ERROR::GAME::initFonts()::'couldn't load font slkscr.ttf" << std::endl;
 	}
 	else {
 		//setting default score value
@@ -130,7 +132,7 @@ void Game::initFonts(){
 		//setting font of text with scores
 		this->scorePoints.setFont(this->fontSlkscr);
 		//setting defualt text communicat with scores
-		this->scorePoints.setString("Score: "+ std::to_string(this->score));
+		this->scorePoints.setString("Score: " + std::to_string(this->score));
 		//setting positon of score points
 		this->scorePoints.setPosition(10.f, 0.f);
 	}
@@ -139,91 +141,103 @@ void Game::initFonts(){
 
 
 //Non argument Constructor
-Game::Game()
-{
+Game::Game(sf::RenderWindow* window)
+{	
+	this->window = window;
 	this->initVariables();
-	this->initWindow();
 	this->initPlayer();
 	this->loadMap();
 	this->initFonts();
-	
+
 }
 
 //Non Argument deconstructor
 Game::~Game()
 {
-	delete this->window;
+	//delete this->window;
 	delete this->player;
 	delete this->currentMap;
-	
+
 }
 
 //Accessors
 const bool Game::running() const
-{
-	return this->window->isOpen();
+{	
+	
+	if (this->window->isOpen() && this->gamePlayed)
+		return true;
+	else
+		return false;
 }
 
 
 
 //updating event that happenning on screen mouse click etc
-void Game::update() 
+void Game::update()
 {
 	this->pollEvents();
-	
+
 }
 
 
 //Rendering new frame of window
-void Game::render() 
-{	
-	
-	if(this->player->weapon->getWeaponWasFired() )
+void Game::render()
+{
+
+	if (this->player->weapon->getWeaponWasFired())
 		this->weaponCounterPlayer++;
-		
+
 	if (this->weaponCounterPlayer == 60 - this->player->weapon->getWeaponReloadStat()) {
 		this->weaponCounterPlayer = 0;
 		this->player->weapon->setWeaponWasFired(false);
 	}
 
-	
+
 	//enemie fighting back
-	if(!this->currentMap->enemies.empty())
-	for (int e = 0; e < this->currentMap->enemies.size(); e++) {
-		if (this->currentMap->enemies[e]->weapon->getWeaponWasFired())
-			this->weaponCounterEnemie++;
+	if (!this->currentMap->enemies.empty())
+		for (int e = 0; e < this->currentMap->enemies.size(); e++) {
+			if (this->currentMap->enemies[e]->weapon->getWeaponWasFired())
+				this->weaponCounterEnemie++;
 
-		if (this->weaponCounterEnemie == 200 - this->currentMap->enemies[e]->weapon->getWeaponReloadStat()) {
-			this->weaponCounterEnemie = 0;
-			this->currentMap->enemies[e]->weapon->setWeaponWasFired(false);
+			if (this->weaponCounterEnemie == 200 - this->currentMap->enemies[e]->weapon->getWeaponReloadStat()) {
+				this->weaponCounterEnemie = 0;
+				this->currentMap->enemies[e]->weapon->setWeaponWasFired(false);
+			}
+			if (!this->currentMap->enemies[e]->weapon->getWeaponWasFired())
+			{
+				this->currentMap->enemies[e]->weapon->addNewBullet(this->currentMap->enemies[e]->getEnemyShape().getPosition(), sf::Vector2i(this->player->getPlayerPostion().x, this->player->getPlayerPostion().y));
+				this->currentMap->enemies[e]->weapon->setWeaponWasFired(true);
+			}
+
 		}
-		if (!this->currentMap->enemies[e]->weapon->getWeaponWasFired())
-		{
-			this->currentMap->enemies[e]->weapon->addNewBullet(this->currentMap->enemies[e]->getEnemyShape().getPosition(),sf::Vector2i(this->player->getPlayerPostion().x, this->player->getPlayerPostion().y) );
-			this->currentMap->enemies[e]->weapon->setWeaponWasFired(true);
+
+
+
+	for (int e = 0; e < this->currentMap->enemies.size(); e++) {
+
+		//player hitted
+		score -= this->currentMap->checkIfTargetIsHittedByBullets(this->player->getShape(), this->currentMap->enemies[e]->weapon->getBullets());
+
+		//enemie hitted
+		if (this->currentMap->checkIfTargetIsHittedByBullets(this->currentMap->enemies[e]->getEnemyShape(), this->player->weapon->getBullets())){
+			score++;
+			this->currentMap->enemies.erase(this->currentMap->enemies.begin()+e);
+			this->currentMap->addEnemy();
 		}
+
 
 	}
 	
-
-	for (int e = 0; e < this->currentMap->enemies.size(); e++) {
-		
-		this->currentMap->checkIfWallHitted((this->currentMap->enemies[e]->weapon->getBullets()));
-		
-	}
-
-	score -= this->currentMap->checkIfPlayerHitted((this->player->getShape()));
-
-
+	//if player win or loses will be send to main menu
 	if (score > 10) {
 
 		std::cout << "You win ;)" << std::endl;
-		this->window->close();
+		this->gamePlayed = false;
 	}
 	if ( score < -10) {
 
 		std::cout << "You Lose :(" << std::endl;
-		this->window->close();
+		this->gamePlayed = false;
 	}
 
 
@@ -248,11 +262,6 @@ void Game::render()
 
 
 
-	//collison detecion and handling bullet with enemy if enemy was kiled return how many enemies was killed and adding that number to score
-	this->score += (this->currentMap->checkIfEnemyHitted((this->player->weapon->getBullets())));
-
-	//collison detecion and handling bullet with walls if hitted delete that bullet
-	this->currentMap->checkIfWallHitted((this->player->weapon->getBullets()));
 
 	//setting new score
 	this->scorePoints.setString("Score: " + std::to_string(this->score));

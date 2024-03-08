@@ -61,14 +61,10 @@ public:
 	//adding new enemy with random cordinates
 	void addEnemy();
 
-	//if enemie is hitted delete that enemie and bullet whitch was hitted
-	//return how many enemies was hitted
-	int checkIfEnemyHitted(std::vector<sf::VertexArray>& bullets);
-
 	//check if bullet hit wall if hit it will delet that bullet
 	void checkIfWallHitted(std::vector<sf::VertexArray>& bullets);
 	
-	int checkIfPlayerHitted(sf::Sprite player);
+	int checkIfTargetIsHittedByBullets(sf::Sprite target, std::vector<sf::VertexArray>& bullets);
 
 	//drawing current map
 	//firstly it drawing passable objects later on walls that can't player can go through
