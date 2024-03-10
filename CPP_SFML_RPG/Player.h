@@ -31,11 +31,13 @@ public:
 	//weapon//
 	Weapon* weapon;//wepon
 	//initializer weapon
-	void initWeapon();
+	void initWeapon(float weaponSpeed , float weaponReload );
 
 
 	//default spawns player at 0,0
 	Player();
+
+	Player(const sf::Vector2i windowSize,int playerSpeed, float weaponSpeed, float weaponReload);
 
 	//for attribute it need window size to spawn player on center of map
 	Player(sf::Vector2i windowSize);

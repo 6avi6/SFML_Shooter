@@ -5,6 +5,7 @@
 
 #include "TitleScreen.h"
 
+
 class Screens {
 private:
 
@@ -22,12 +23,13 @@ private:
 	
 	void initTitleScreen();
 	void openTitleScreen();
+	
 public:
 	Screens();
 
 	void Start();
 	
-
+	
 };
 
 

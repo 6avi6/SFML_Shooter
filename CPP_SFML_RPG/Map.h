@@ -17,6 +17,7 @@
 
 #include<iostream>
 
+#include "GameSettings.h"
 class Map {
 private:
 
@@ -37,7 +38,7 @@ private:
 	//std::vector<Enemy>
 	//it will create white squre problem
 	
-
+	EnemySettings enemySettings;
 
 	//method to test later on delete
 	void createTestMap();
@@ -46,6 +47,7 @@ public:
 	std::vector<std::unique_ptr<Enemy>> enemies;
 	//Map construtor where numberOfMap is map that will be read
 	Map(int numberOfMap=0);
+	Map(int numberOfMap, GameSettings* gameplaySettings);
 
 	//deconstructor of map
 	~Map();

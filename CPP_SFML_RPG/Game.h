@@ -16,17 +16,18 @@
 //map class
 #include "Map.h"
 
+#include "GameSettings.h"
 //used for cout and endl
 #include <iostream>
 
 //this lib is used for conversion int => string
 #include <string>
 
+
 class Game {
 private:
 	bool gamePlayed;
 	//window fields//
-
 	sf::Vector2i windowSize;	//window size 
 	sf::RenderWindow* window;	//window object wherein will be game
 	sf::VideoMode videoMode;	//setting of window display like fullscreen/not or size of screen
@@ -35,8 +36,6 @@ private:
 
 	//init variables
 	void initVariables(); 
-	//init window with game
-	void initWindow();
 	//lisiner listener of user inputs
 	void pollEvents();
 	
@@ -45,11 +44,15 @@ private:
 	//method that return positon of mouse max position is VideoMode.height and width and the lowest are 0
 	void getMousePosition();
 
+	//Gameplay settings//
+	GameSettings* gameplaySettings;
+
 	//Player Variabels
 	Player* player;//player
 	int	weaponCounterPlayer;//used to calc reload time
 	//init player
 	void initPlayer();
+	void initPlayer(int playerSpeed, float weaponSpeed, float weaponReload);
 
 	
 
@@ -73,6 +76,7 @@ public:
 
 	//Non argument Construstor;
 	Game(sf::RenderWindow* window);
+	Game(sf::RenderWindow* window, GameSettings* gameplaySettings);
 	//Non argument deconstructor
 	virtual ~Game();
 

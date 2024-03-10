@@ -26,13 +26,14 @@ public:
 	//weapon//
 	Weapon* weapon;//wepon
 	//initializer weapon
-	void initWeapon();
+	void initWeapon(float weaponSpeed=4.f, float weaponReload=20.f);
 
 
 	//default enemy constructor spawns enemy on 0;0 corrdinates
 	Enemy();
 	//enemy constructor spawns enemy on corrdinates given as attributes x:y
 	Enemy(float x, float y);
+	Enemy(float x, float y,float weweaponSpeed, float weaponReload);
 
 	//defualt deconstructor
 	~Enemy();

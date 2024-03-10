@@ -4,7 +4,9 @@
 #include <SFML/Graphics.hpp>
 
 #include "Game.h"
+#include "SettingsScreen.h"
 #include <iostream>
+
 class TitleScreen {
 private:
 
@@ -29,10 +31,19 @@ private:
 
 
 	void initTitleScreen();
-	void initGame();
-	void openGame();
+	
 	
 	Game* game;
+	GameSettings *gameplaySettings;
+	void initGameplaySettings();
+	void initGame();
+	void openGame();
+
+
+	SettingsScreen* settingsScreen;
+	void initSettingScreen();
+	void openSettingScreen();
+
 public:
 	TitleScreen(sf::RenderWindow* window);
 	void drawScreen();

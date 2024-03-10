@@ -36,11 +36,19 @@ Player::Player()
 {
 	this->initValues();
 }
-
 //creating new weapon
-void Player::initWeapon() {
-	this->weapon = new Weapon(8.f,45.f);
+void Player::initWeapon(float weaponSpeed = 10.f, float weaponReload = 45.f) {
+	this->weapon = new Weapon(weaponSpeed, weaponReload);
 }
+
+Player::Player(const sf::Vector2i windowSize,int playerSpeed, float weaponSpeed, float weaponReload)
+{
+	this->initValues();
+	this->initWeapon(weaponSpeed, weaponReload);
+	this->speed=playerSpeed;
+	
+}
+
 
 //constructor that spawns player on center of screen
 Player::Player(const sf::Vector2i windowSize) {

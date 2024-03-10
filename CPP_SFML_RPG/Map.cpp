@@ -30,6 +30,14 @@ Map::Map(int numberOfMap){
 	loadMap();
 }
 
+Map::Map(int numberOfMap, GameSettings* gameplaySettings)
+{
+	this->numberOfMap = numberOfMap;
+	this->enemySettings = (gameplaySettings->enemy);
+	loadMap();
+	
+}
+
 
 //deconstructor of map
 Map::~Map(){
@@ -43,7 +51,7 @@ std::vector <sf::VertexArray> Map::getWallObject()const {
 
 void Map::addEnemy(float x,float y)
 {
-	auto newEnemy = std::make_unique<Enemy>(x, y);
+	auto newEnemy = std::make_unique<Enemy>(x, y,this->enemySettings.bulletSpeed, this->enemySettings.reloadTime);
 
 	// Addig enemy to vector
 	enemies.push_back(std::move(newEnemy));
@@ -75,7 +83,7 @@ void Map::addEnemy()
 	} while (enemyInWall);
 
 	// Creating a new instance of an enemy
-	enemies.push_back(std::make_unique<Enemy>(randomX, randomY));
+	enemies.push_back(std::make_unique<Enemy>(randomX, randomY,this->enemySettings.bulletSpeed, this->enemySettings.reloadTime));
 	
 }
 
@@ -271,9 +279,7 @@ void Map::createTestMap() {
 
 
 	//crating new enemie
-	this->addEnemy();
-	this->addEnemy();
-	this->addEnemy();
-	this->addEnemy();
-	this->addEnemy();
+	for (int i = 0; i < this->enemySettings.numEnemies; i++) {
+		this->addEnemy();
+	}
 }

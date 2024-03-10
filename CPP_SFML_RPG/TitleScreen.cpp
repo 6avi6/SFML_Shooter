@@ -27,6 +27,7 @@ void TitleScreen::initTitleScreen() {
 
    this->initFonts();
    this->loadWallpaper();
+   this->initGameplaySettings();
 }
 
 TitleScreen::TitleScreen(sf::RenderWindow* window)
@@ -51,6 +52,7 @@ void TitleScreen::drawScreen()
                     if (playButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
                         this->initGame();
                         this->openGame();
+
                         std::cout << "Play button clicked!" << std::endl;
                     }
                     else if (quitButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
@@ -59,7 +61,9 @@ void TitleScreen::drawScreen()
                     }
                     else if (settingsButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
                         // Handle Settings button click
-                        // For now, let's just print a message
+                        this->initSettingScreen();
+                        this->openSettingScreen();
+                        delete this->settingsScreen;
                         std::cout << "Settings button clicked!" << std::endl;
                     }
                 }
@@ -87,14 +91,18 @@ void TitleScreen::drawScreen()
     }
 }
 
+
+//Game//
 void TitleScreen::initGame() {
+    //if some game already existed deleting that game and starting new
     if (this->game != nullptr)
         delete this->game;
 
-    this->game = new Game(window);
+    this->game = new Game(window,gameplaySettings);
 
 
 }
+
 void TitleScreen::openGame() {
 
 
@@ -110,6 +118,36 @@ void TitleScreen::openGame() {
 
 
 
+}
+
+
+void TitleScreen::initGameplaySettings()
+{   
+    this->gameplaySettings = new GameSettings();
+    //player//
+    this->gameplaySettings->player.speed = 7.f;
+    this->gameplaySettings->player.bulletSpeed = 10.f;
+    this->gameplaySettings->player.reloadTime = 50.f;
+
+    //enemy//
+    this->gameplaySettings->enemy.bulletSpeed = 5.f;
+    this->gameplaySettings->enemy.reloadTime = 2.f;
+    this->gameplaySettings->enemy.numEnemies = 6;
+}
+
+void TitleScreen::initSettingScreen() {
+    this->settingsScreen = new SettingsScreen(this->window, this->gameplaySettings);
+}
+void TitleScreen::openSettingScreen() {
+    //Main Game loop
+    while (this->settingsScreen->running()) {
+
+        //Read input information keyboard mouse etc
+        this->settingsScreen->handleEvent();
+        this->settingsScreen->draw();
+
+       
+    }
 }
 
 void TitleScreen::loadWallpaper()

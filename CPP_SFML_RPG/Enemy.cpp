@@ -21,13 +21,13 @@ void Enemy::initEnemy() {
 	}
 	
 	
-	this->initWeapon();
+	
 }
 
 //creating new weapon
-void Enemy::initWeapon() {
+void Enemy::initWeapon(float weaponSpeed, float weaponReload) {
 	
-	this->weapon = new Weapon(4.f,20.f);
+	this->weapon = new Weapon(weaponSpeed, weaponReload);
 }
 
 //default constructor
@@ -39,7 +39,15 @@ Enemy::Enemy(){
 Enemy::Enemy(float x, float y)
 {	
 	this->initEnemy();
+	this->initWeapon();
 	this->enemyEntity.setPosition(x,y);
+}
+
+Enemy::Enemy(float x, float y, float weaponSpeed, float weaponReload)
+{
+	this->initEnemy();
+	this->enemyEntity.setPosition(x, y);
+	this->initWeapon(weaponSpeed, weaponReload);
 }
 
 //defualt deconstructor

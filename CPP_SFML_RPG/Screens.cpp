@@ -28,9 +28,11 @@ void Screens::openTitleScreen()
 	this->titleScreen->drawScreen();
 }
 
+
+
 Screens::Screens() {
 	this->initWindow();
-   
+	
 	this->initTitleScreen();
 }
 

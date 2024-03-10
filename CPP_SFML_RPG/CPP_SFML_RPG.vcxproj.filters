@@ -13,54 +13,96 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\ElementsHeader">
+      <UniqueIdentifier>{1a01c37a-b683-49ad-a3da-8222fb4d9509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\ElementsSource">
+      <UniqueIdentifier>{427b7ddf-3649-408b-adcd-35dc1f325947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\ScreensHeader">
+      <UniqueIdentifier>{b3ac1138-cba1-4b27-866c-b759f1354e4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\ScreensSource">
+      <UniqueIdentifier>{b8196f76-2857-4bb3-b8d3-32aaccbf620e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\ScreensSource\GameSource">
+      <UniqueIdentifier>{42636b9d-2f46-4f19-a561-3f189848ca75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\ScreensHeader\GameHeader">
+      <UniqueIdentifier>{86cec16d-d24d-4896-ad84-c27a9a663e0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\DataStructures">
+      <UniqueIdentifier>{0a85808d-3cc5-45e3-8573-8458023b6978}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPP_SFML_RPG.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Screens.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="Slider.cpp">
+      <Filter>Pliki źródłowe\ElementsSource</Filter>
     </ClCompile>
     <ClCompile Include="TitleScreen.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\ScreensSource</Filter>
+    </ClCompile>
+    <ClCompile Include="Screens.cpp">
+      <Filter>Pliki źródłowe\ScreensSource</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Pliki źródłowe\ScreensSource\GameSource</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Pliki źródłowe\ScreensSource\GameSource</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Pliki źródłowe\ScreensSource\GameSource</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Pliki źródłowe\ScreensSource\GameSource</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Pliki źródłowe\ScreensSource\GameSource</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySettings.h">
+      <Filter>Pliki nagłówkowe\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsScreen.cpp">
+      <Filter>Pliki źródłowe\ScreensSource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Screens.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="Slider.h">
+      <Filter>Pliki nagłówkowe\ElementsHeader</Filter>
     </ClInclude>
     <ClInclude Include="TitleScreen.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\ScreensHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Pliki nagłówkowe\ScreensHeader\GameHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Pliki nagłówkowe\ScreensHeader\GameHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Pliki nagłówkowe\ScreensHeader\GameHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Pliki nagłówkowe\ScreensHeader\GameHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Screens.h">
+      <Filter>Pliki nagłówkowe\ScreensHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Pliki nagłówkowe\ScreensHeader\GameHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSettings.h">
+      <Filter>Pliki nagłówkowe\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSettings.h">
+      <Filter>Pliki nagłówkowe\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsScreen.h">
+      <Filter>Pliki nagłówkowe\ScreensHeader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

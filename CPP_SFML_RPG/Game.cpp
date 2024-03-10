@@ -18,16 +18,7 @@ void Game::initVariables()
 	this->gamePlayed = true;
 }
 
-//setting window attribs
-void Game::initWindow()
-{
 
-	//settings of window
-	//this->window = new sf::RenderWindow(videoMode, "Game Window",sf::Style::Titlebar | sf::Style::Close,settings);
-
-	//frame rate per second limitation
-	//this->window->setFramerateLimit(60);
-}
 
 //lisiner listener of user inputs
 void Game::pollEvents()
@@ -68,6 +59,7 @@ void Game::pollEvents()
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
+		
 		// left mouse button is pressed: shoot
 		if (!this->player->weapon->getWeaponWasFired())
 		{
@@ -106,17 +98,21 @@ void Game::getMousePosition()
 }
 
 
-
 //creating new player
 void Game::initPlayer()
 {
 	player = new Player(this->windowSize);
 }
 
+void Game::initPlayer(int playerSpeed ,float weaponSpeed , float weaponReload )
+{
+	player = new Player(this->windowSize, playerSpeed,weaponSpeed, weaponReload);
+}
+
 
 //void Game
 void Game::loadMap(int mapNumber) {
-	this->currentMap = new Map(mapNumber);
+	this->currentMap = new Map(mapNumber,this->gameplaySettings);
 }
 
 //loading font and init default text communicats
@@ -150,14 +146,23 @@ Game::Game(sf::RenderWindow* window)
 	this->initFonts();
 
 }
-
+Game::Game(sf::RenderWindow* window, GameSettings* gameplaySettings)
+{
+	this->window = window;
+	this->gameplaySettings = gameplaySettings;
+	this->initVariables();
+	this->initPlayer( gameplaySettings->player.bulletSpeed, gameplaySettings->player.speed, gameplaySettings->player.reloadTime);
+	this->loadMap();
+	this->initFonts();
+	
+}
 //Non Argument deconstructor
 Game::~Game()
 {
 	//delete this->window;
 	delete this->player;
 	delete this->currentMap;
-
+	
 }
 
 //Accessors
@@ -169,6 +174,8 @@ const bool Game::running() const
 	else
 		return false;
 }
+
+
 
 
 
@@ -187,7 +194,7 @@ void Game::render()
 	if (this->player->weapon->getWeaponWasFired())
 		this->weaponCounterPlayer++;
 
-	if (this->weaponCounterPlayer == 60 - this->player->weapon->getWeaponReloadStat()) {
+	if (this->weaponCounterPlayer ==60 - this->player->weapon->getWeaponReloadStat()) {
 		this->weaponCounterPlayer = 0;
 		this->player->weapon->setWeaponWasFired(false);
 	}

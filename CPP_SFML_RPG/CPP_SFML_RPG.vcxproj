@@ -134,20 +134,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CPP_SFML_RPG.cpp" />
+    <ClCompile Include="EnemySettings.h" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Screens.cpp" />
+    <ClCompile Include="SettingsScreen.cpp" />
+    <ClCompile Include="Slider.cpp" />
     <ClCompile Include="TitleScreen.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameSettings.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerSettings.h" />
     <ClInclude Include="Screens.h" />
+    <ClInclude Include="SettingsScreen.h" />
+    <ClInclude Include="Slider.h" />
     <ClInclude Include="TitleScreen.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
