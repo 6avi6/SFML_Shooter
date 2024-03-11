@@ -27,7 +27,8 @@ void TitleScreen::initTitleScreen() {
 
    this->initFonts();
    this->loadWallpaper();
-   this->initGameplaySettings();
+   this->settingFilename = "Data/gameSettings.txt";
+   this->readSettingsFromFile();
 }
 
 TitleScreen::TitleScreen(sf::RenderWindow* window)
@@ -121,22 +122,31 @@ void TitleScreen::openGame() {
 }
 
 
-void TitleScreen::initGameplaySettings()
-{   
+void TitleScreen::readSettingsFromFile() {
+    std::ifstream inputFile(this->settingFilename);
+    
+    if (!inputFile.is_open()) {
+        // Handle file opening failure
+        std::cerr << "ERROR::TitleScreen::readSettingsFromFile()::'Failed to open file:' " << this->settingFilename << std::endl;
+        return;
+    }
     this->gameplaySettings = new GameSettings();
-    //player//
-    this->gameplaySettings->player.speed = 7.f;
-    this->gameplaySettings->player.bulletSpeed = 10.f;
-    this->gameplaySettings->player.reloadTime = 50.f;
+    // Read player settings
+    inputFile >> gameplaySettings->player.speed;
+    inputFile >> gameplaySettings->player.bulletSpeed;
+    inputFile >> gameplaySettings->player.reloadTime;
 
-    //enemy//
-    this->gameplaySettings->enemy.bulletSpeed = 5.f;
-    this->gameplaySettings->enemy.reloadTime = 2.f;
-    this->gameplaySettings->enemy.numEnemies = 6;
+    // Read enemy settings
+    inputFile >> gameplaySettings->enemy.bulletSpeed;
+    inputFile >> gameplaySettings->enemy.reloadTime;
+    inputFile >> gameplaySettings->enemy.numEnemies;
+
+    inputFile.close();
 }
 
+
 void TitleScreen::initSettingScreen() {
-    this->settingsScreen = new SettingsScreen(this->window, this->gameplaySettings);
+    this->settingsScreen = new SettingsScreen(this->window, this->gameplaySettings,this->settingFilename);
 }
 void TitleScreen::openSettingScreen() {
     //Main Game loop
@@ -161,7 +171,7 @@ void TitleScreen::loadWallpaper()
         this->wallpaperPicture.setTexture(this->wallpaperTexture);
 
         //resizeing player
-        std::cout << "loaded";
+       
         //this->wallpaperPicture.scale(50.f,50.f);
 
     }

@@ -13,8 +13,7 @@ void Game::initVariables()
 	//displayed quality higher = better
 	//this->settings.antialiasingLevel = 8;
 	
-	this->weaponCounterPlayer = 0;
-	this->weaponCounterEnemie = 0;
+	
 	this->gamePlayed = true;
 }
 
@@ -60,12 +59,10 @@ void Game::pollEvents()
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		
-		// left mouse button is pressed: shoot
-		if (!this->player->weapon->getWeaponWasFired())
-		{
+		
+		
 			this->player->weapon->addNewBullet(this->player->getPlayerPostion(), this->globalMousePosition);
-			this->player->weapon->setWeaponWasFired(true);
-		}
+		
 
 		//logs how with player score
 		//std::cout <<"How many enemies hitted: "<< this->score << std::endl;
@@ -151,7 +148,7 @@ Game::Game(sf::RenderWindow* window, GameSettings* gameplaySettings)
 	this->window = window;
 	this->gameplaySettings = gameplaySettings;
 	this->initVariables();
-	this->initPlayer( gameplaySettings->player.bulletSpeed, gameplaySettings->player.speed, gameplaySettings->player.reloadTime);
+	this->initPlayer(gameplaySettings->player.speed, gameplaySettings->player.bulletSpeed,  gameplaySettings->player.reloadTime);
 	this->loadMap();
 	this->initFonts();
 	
@@ -191,31 +188,17 @@ void Game::update()
 void Game::render()
 {
 
-	if (this->player->weapon->getWeaponWasFired())
-		this->weaponCounterPlayer++;
-
-	if (this->weaponCounterPlayer ==60 - this->player->weapon->getWeaponReloadStat()) {
-		this->weaponCounterPlayer = 0;
-		this->player->weapon->setWeaponWasFired(false);
-	}
+	
 
 
 	//enemie fighting back
 	if (!this->currentMap->enemies.empty())
 		for (int e = 0; e < this->currentMap->enemies.size(); e++) {
-			if (this->currentMap->enemies[e]->weapon->getWeaponWasFired())
-				this->weaponCounterEnemie++;
 
-			if (this->weaponCounterEnemie == 200 - this->currentMap->enemies[e]->weapon->getWeaponReloadStat()) {
-				this->weaponCounterEnemie = 0;
-				this->currentMap->enemies[e]->weapon->setWeaponWasFired(false);
-			}
-			if (!this->currentMap->enemies[e]->weapon->getWeaponWasFired())
 			{
 				this->currentMap->enemies[e]->weapon->addNewBullet(this->currentMap->enemies[e]->getEnemyShape().getPosition(), sf::Vector2i(this->player->getPlayerPostion().x, this->player->getPlayerPostion().y));
-				this->currentMap->enemies[e]->weapon->setWeaponWasFired(true);
-			}
 
+			}
 		}
 
 
@@ -236,7 +219,7 @@ void Game::render()
 	}
 	
 	//if player win or loses will be send to main menu
-	if (score > 10) {
+	if (score > 25) {
 
 		std::cout << "You win ;)" << std::endl;
 		this->gamePlayed = false;

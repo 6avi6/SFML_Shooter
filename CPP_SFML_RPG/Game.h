@@ -49,7 +49,7 @@ private:
 
 	//Player Variabels
 	Player* player;//player
-	int	weaponCounterPlayer;//used to calc reload time
+	
 	//init player
 	void initPlayer();
 	void initPlayer(int playerSpeed, float weaponSpeed, float weaponReload);
@@ -60,7 +60,7 @@ private:
 	Map* currentMap;//current map of game
 	//map initializer
 	void loadMap(int mapNumber=0);
-	int	weaponCounterEnemie;
+
 
 	//fonts//
 	sf::Font fontSlkscr;//storing font named:SlKscr

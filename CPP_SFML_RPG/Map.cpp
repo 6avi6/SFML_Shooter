@@ -262,7 +262,7 @@ void Map::createTestMap() {
 
 	rectangle[0].position = position;
 	rectangle[1].position = position + sf::Vector2f(size.x, 0.f);
-	size = sf::Vector2f(100.f, 100.f);
+	
 	rectangle[2].position = position + size;
 	rectangle[3].position = position + sf::Vector2f(0.f, size.y);
 	for (int i = 0; i < 4; ++i) {

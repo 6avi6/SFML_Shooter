@@ -5,6 +5,7 @@
 #include "GameSettings.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <fstream>
 
 class SettingsScreen {
 private:
@@ -17,6 +18,8 @@ private:
     Slider enemyBulletSpeedSlider;
     Slider numEnemiesSlider;
    
+    sf::RectangleShape applyButtonRectangle;
+    sf::RectangleShape backButtonRectangle;
 
     // Text
     sf::Font font;
@@ -25,10 +28,13 @@ private:
     sf::Text TitleOfTab;
     void initFont();
 
+    std::string settingFilename;
+    void saveSettingsToFile();
+
     sf::Event event;
     bool isActive;
 public:
-    SettingsScreen(sf::RenderWindow* window, GameSettings* settings);
+    SettingsScreen(sf::RenderWindow* window, GameSettings* settings,std::string settingFilename);
 
     void draw();
     void handleEvent();

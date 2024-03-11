@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "SettingsScreen.h"
 #include <iostream>
+#include <fstream>
 
 class TitleScreen {
 private:
@@ -26,6 +27,7 @@ private:
 	sf::Text quitButtonText;
 	
 	sf::RectangleShape settingsButton;
+	std::string settingFilename;
 	sf::Text settingsButtonText;
 	void initFonts();
 
@@ -35,7 +37,8 @@ private:
 	
 	Game* game;
 	GameSettings *gameplaySettings;
-	void initGameplaySettings();
+	void readSettingsFromFile();
+	
 	void initGame();
 	void openGame();
 
@@ -45,6 +48,7 @@ private:
 	void openSettingScreen();
 
 public:
+	
 	TitleScreen(sf::RenderWindow* window);
 	void drawScreen();
 

@@ -13,6 +13,7 @@ private:
 	float weaponeRange;//how far from player weapon can deal damege
 	float weaponSpeed;//e.g how fast nullet should be 
 	float weaponReload;//lvl of how fast weapon can be used again
+	float weponReloadCounter;
 	bool weaponFired;//if weapon is cooling down or not/if is reloaded or empyt chamber 
 	
 
