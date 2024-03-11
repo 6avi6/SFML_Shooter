@@ -9,7 +9,7 @@
 class Weapon {
 private:
 	//weapon stats//
-	
+	float weaponDamage;
 	float weaponeRange;//how far from player weapon can deal damege
 	float weaponSpeed;//e.g how fast nullet should be 
 	float weaponReload;//lvl of how fast weapon can be used again
@@ -28,7 +28,7 @@ private:
 
 
 	//initialization of Variabels
-	void initVariabels(float weaponSpeed, float weaponReload);
+	void initVariabels();
 
 	//loading texture of bulets
 	void loadTextures();
@@ -36,7 +36,7 @@ private:
 public:
 	
 	//default constructor 
-	Weapon(float weaponSpeed, float weaponReload);
+	Weapon(float weaponSpeed, float weaponReload, float weaponDamage);
 
 	//default deconstructor 
 	~Weapon();
@@ -59,6 +59,8 @@ public:
 	 //is used to told if player shot from weapon or not and if it need cooldown
 	 bool getWeaponWasFired()const ;
 	 void setWeaponWasFired(bool statusOfWeapon);
+
+	 const float getWeaponDamage();
 };
 
 #endif // !WEAPON_H

@@ -37,14 +37,25 @@ Player::Player()
 	this->initValues();
 }
 //creating new weapon
-void Player::initWeapon(float weaponSpeed = 10.f, float weaponReload = 45.f) {
-	this->weapon = new Weapon(weaponSpeed, weaponReload);
+void Player::initWeapon(float weaponSpeed = 10.f, float weaponReload = 45.f,float weaponDamage=25.f) {
+	this->weapon = new Weapon(weaponSpeed, weaponReload, weaponDamage);
 }
 
-Player::Player(const sf::Vector2i windowSize,int playerSpeed, float weaponSpeed, float weaponReload)
+const float Player::getPlayerHealth()
+{
+	return this->playerHealth;
+}
+
+void Player::playerReactionToDamge(float enemyWeaponDamage)
+{
+	this->playerHealth -= enemyWeaponDamage;
+}
+
+Player::Player(const sf::Vector2i windowSize,int playerSpeed, float weaponSpeed, float weaponReload, float weaponDamage, float playerHealth):
+ playerHealth(playerHealth)
 {
 	this->initValues();
-	this->initWeapon(weaponSpeed, weaponReload);
+	this->initWeapon(weaponSpeed, weaponReload, weaponDamage);
 	this->speed=playerSpeed;
 	
 }

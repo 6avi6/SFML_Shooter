@@ -11,7 +11,7 @@ private:
 	//scale of enlargement
 	float width;
 	float height;
-
+	float enemyHealth;
 	//texture of the enemy 
 	sf::Texture enemyTexture;
 
@@ -26,14 +26,14 @@ public:
 	//weapon//
 	Weapon* weapon;//wepon
 	//initializer weapon
-	void initWeapon(float weaponSpeed=4.f, float weaponReload=20.f);
+	void initWeapon(float weaponSpeed=4.f, float weaponReload=20.f, float weaponDamage=5.f);
 
 
 	//default enemy constructor spawns enemy on 0;0 corrdinates
 	Enemy();
 	//enemy constructor spawns enemy on corrdinates given as attributes x:y
 	Enemy(float x, float y);
-	Enemy(float x, float y,float weweaponSpeed, float weaponReload);
+	Enemy(float x, float y,float weweaponSpeed, float weaponReload,float weaponDamage, float enemyHealth );
 
 	//defualt deconstructor
 	~Enemy();
@@ -44,7 +44,8 @@ public:
 	//getter of enemy shape is used mainly to detect collison with bullet
 	const sf::Sprite getEnemyShape() ;
 	
-
+	void enemyReactionToDamage(float playerWeaponDamage);
+	const float getEnemyHealth();
 };
 
 #endif // !ENEMY_H

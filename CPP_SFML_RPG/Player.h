@@ -19,6 +19,7 @@ private:
 
 
 	//attributes//
+	float playerHealth;
 	int speed;//spedd of the player
 
 
@@ -31,13 +32,16 @@ public:
 	//weapon//
 	Weapon* weapon;//wepon
 	//initializer weapon
-	void initWeapon(float weaponSpeed , float weaponReload );
+	void initWeapon(float weaponSpeed , float weaponReload,float weaponDamage);
 
+	const float getPlayerHealth();
+
+	void playerReactionToDamge(float enemyWeaponDamage);
 
 	//default spawns player at 0,0
 	Player();
 
-	Player(const sf::Vector2i windowSize,int playerSpeed, float weaponSpeed, float weaponReload);
+	Player(const sf::Vector2i windowSize,int playerSpeed, float weaponSpeed, float weaponReload, float weaponDamage, float playerHealth);
 
 	//for attribute it need window size to spawn player on center of map
 	Player(sf::Vector2i windowSize);

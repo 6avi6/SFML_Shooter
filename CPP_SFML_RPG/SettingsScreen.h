@@ -11,13 +11,22 @@ class SettingsScreen {
 private:
     sf::RenderWindow* window;
     GameSettings* settings;
+
+    //player sliders
     Slider playerSpeedSlider;
     Slider playerReloadSlider;
     Slider playerBulletSpeedSlider;
+    Slider playerHealthSlider;
+    Slider playerWeaponDamageSlider;
+
+    //enemies sliders
     Slider enemyReloadSlider;
     Slider enemyBulletSpeedSlider;
+    Slider enemyHealthSlider;
+    Slider enemyWeaponDamageSlider;
     Slider numEnemiesSlider;
-   
+    
+
     sf::RectangleShape applyButtonRectangle;
     sf::RectangleShape backButtonRectangle;
 

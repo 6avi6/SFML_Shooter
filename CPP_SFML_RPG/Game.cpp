@@ -98,12 +98,7 @@ void Game::getMousePosition()
 //creating new player
 void Game::initPlayer()
 {
-	player = new Player(this->windowSize);
-}
-
-void Game::initPlayer(int playerSpeed ,float weaponSpeed , float weaponReload )
-{
-	player = new Player(this->windowSize, playerSpeed,weaponSpeed, weaponReload);
+	player = new Player(this->windowSize, this->gameplaySettings->player.speed, this->gameplaySettings->player.bulletSpeed,  this->gameplaySettings->player.reloadTime,  this->gameplaySettings->player.playerHealth, this->gameplaySettings->player.weaponDamage);
 }
 
 
@@ -148,7 +143,7 @@ Game::Game(sf::RenderWindow* window, GameSettings* gameplaySettings)
 	this->window = window;
 	this->gameplaySettings = gameplaySettings;
 	this->initVariables();
-	this->initPlayer(gameplaySettings->player.speed, gameplaySettings->player.bulletSpeed,  gameplaySettings->player.reloadTime);
+	this->initPlayer();
 	this->loadMap();
 	this->initFonts();
 	
@@ -202,17 +197,23 @@ void Game::render()
 		}
 
 
-
+	
 	for (int e = 0; e < this->currentMap->enemies.size(); e++) {
 
-		//player hitted
-		score -= this->currentMap->checkIfTargetIsHittedByBullets(this->player->getShape(), this->currentMap->enemies[e]->weapon->getBullets());
-
+		//player hitted by 'e'
+		this->player->playerReactionToDamge(this->currentMap->checkIfTargetIsHittedByBullets(this->player->getShape(), this->currentMap->enemies[e]->weapon->getBullets())* this->currentMap->enemies[e]->weapon->getWeaponDamage());
+		
 		//enemie hitted
-		if (this->currentMap->checkIfTargetIsHittedByBullets(this->currentMap->enemies[e]->getEnemyShape(), this->player->weapon->getBullets())){
-			score++;
-			this->currentMap->enemies.erase(this->currentMap->enemies.begin()+e);
-			this->currentMap->addEnemy();
+
+		int enemieHittedByPlayerCounter = this->currentMap->checkIfTargetIsHittedByBullets(this->currentMap->enemies[e]->getEnemyShape(), this->player->weapon->getBullets());
+		if (enemieHittedByPlayerCounter>0){
+			this->currentMap->enemies[e]->enemyReactionToDamage(this->player->weapon->getWeaponDamage()*enemieHittedByPlayerCounter);
+			//if enemy is killed by player
+			if (this->currentMap->enemies[e]->getEnemyHealth() <= 0) {
+				this->currentMap->enemies.erase(this->currentMap->enemies.begin() + e);
+				this->currentMap->addEnemy();
+				score++;
+			}
 		}
 
 
@@ -224,7 +225,7 @@ void Game::render()
 		std::cout << "You win ;)" << std::endl;
 		this->gamePlayed = false;
 	}
-	if ( score < -10) {
+	if (this->player->getPlayerHealth()<=0 ) {
 
 		std::cout << "You Lose :(" << std::endl;
 		this->gamePlayed = false;

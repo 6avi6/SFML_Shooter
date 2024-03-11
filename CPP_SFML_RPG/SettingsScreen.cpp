@@ -48,12 +48,16 @@ void SettingsScreen::saveSettingsToFile() {
     // Write player settings
     outputFile << settings->player.speed << " ";
     outputFile << settings->player.bulletSpeed << " ";
-    outputFile << settings->player.reloadTime << std::endl;
+    outputFile << settings->player.reloadTime << " ";
+    outputFile << settings->player.playerHealth << " ";
+    outputFile << settings->player.weaponDamage << std::endl;
 
     // Write enemy settings
     outputFile << settings->enemy.bulletSpeed << " ";
     outputFile << settings->enemy.reloadTime << " ";
-    outputFile << settings->enemy.numEnemies << std::endl;
+    outputFile << settings->enemy.reloadTime << " ";
+    outputFile << settings->enemy.enemyHealth << " ";
+    outputFile << settings->enemy.weaponDamage << std::endl;
 
     outputFile.close();
 }
@@ -63,9 +67,14 @@ SettingsScreen::SettingsScreen(sf::RenderWindow* window, GameSettings* settings,
     playerSpeedSlider("player Speed", 0, 100, settings->player.speed, sf::Vector2f(100, 100), sf::Vector2f(200, 20)),
     playerReloadSlider("player Reload",0, 600, settings->player.reloadTime, sf::Vector2f(100, 150), sf::Vector2f(200, 20)),
     playerBulletSpeedSlider("player Bullet speed",0, 20, settings->player.bulletSpeed, sf::Vector2f(100, 200), sf::Vector2f(200, 20)),
-    enemyReloadSlider("enemy Reload",0, 600, settings->enemy.reloadTime, sf::Vector2f(100, 250), sf::Vector2f(200, 20)),
-    enemyBulletSpeedSlider("enemys Bullet speed",0, 20, settings->enemy.bulletSpeed, sf::Vector2f(100, 300), sf::Vector2f(200, 20)),
-    numEnemiesSlider("number of Enemies",0, 10, settings->enemy.numEnemies, sf::Vector2f(100, 350), sf::Vector2f(200, 20)),
+    playerHealthSlider("player health",1,100, settings->player.playerHealth, sf::Vector2f(100, 250), sf::Vector2f(200, 20)),
+    playerWeaponDamageSlider("player weapon damge", 1, 100, settings->player.weaponDamage, sf::Vector2f(100, 300), sf::Vector2f(200, 20)),
+
+    enemyReloadSlider("enemy Reload",0, 600, settings->enemy.reloadTime, sf::Vector2f(450, 100), sf::Vector2f(200, 20)),
+    enemyBulletSpeedSlider("enemys Bullet speed",0, 20, settings->enemy.bulletSpeed, sf::Vector2f(450, 150), sf::Vector2f(200, 20)),
+    enemyHealthSlider("enemy Health", 0, 100, settings->enemy.enemyHealth, sf::Vector2f(450, 200), sf::Vector2f(200, 20)),
+    enemyWeaponDamageSlider("enemy weapon damage", 0, 100, settings->enemy.weaponDamage, sf::Vector2f(450, 250), sf::Vector2f(200, 20)),
+    numEnemiesSlider("number of Enemies", 0, 10, settings->enemy.numEnemies, sf::Vector2f(450, 300), sf::Vector2f(200, 20)),
     isActive(true)
 {   
     this->initFont();
@@ -77,8 +86,14 @@ void SettingsScreen::draw() {
     this->playerSpeedSlider.draw(*(this->window));
     this->playerReloadSlider.draw(*(this->window));
     this->playerBulletSpeedSlider.draw(*(this->window));
+    this->playerHealthSlider.draw(*(this->window));
+    this->playerWeaponDamageSlider.draw(*(this->window));
+
+
     this->enemyReloadSlider.draw(*(this->window));
     this->enemyBulletSpeedSlider.draw(*(this->window));
+    this->enemyHealthSlider.draw(*(this->window));
+    this->enemyWeaponDamageSlider.draw(*(this->window));
     this->numEnemiesSlider.draw(*(this->window));
 
 
@@ -128,16 +143,27 @@ void SettingsScreen::handleEvent() {
     playerSpeedSlider.update(*window, event);
     playerReloadSlider.update(*window, event);
     playerBulletSpeedSlider.update(*window, event);
+    playerHealthSlider.update(*window, event);
+    playerWeaponDamageSlider.update(*window, event);
+
+
     enemyReloadSlider.update(*window, event);
     enemyBulletSpeedSlider.update(*window, event);
+    enemyHealthSlider.update(*window, event);
+    enemyWeaponDamageSlider.update(*window, event);
     numEnemiesSlider.update(*window, event);
 
     // Update GameSettings based on slider values
     settings->player.speed = playerSpeedSlider.getValue();
     settings->player.reloadTime = playerReloadSlider.getValue();
     settings->player.bulletSpeed = playerBulletSpeedSlider.getValue();
+    settings->player.playerHealth = this->playerHealthSlider.getValue();
+    settings->player.weaponDamage = this->playerWeaponDamageSlider.getValue();
+    
     settings->enemy.reloadTime = enemyReloadSlider.getValue();
     settings->enemy.bulletSpeed = enemyBulletSpeedSlider.getValue();
+    settings->enemy.enemyHealth = this->enemyHealthSlider.getValue();
+    settings->enemy.weaponDamage = this->enemyWeaponDamageSlider.getValue();
     settings->enemy.numEnemies = static_cast<int>(numEnemiesSlider.getValue());
 }
 

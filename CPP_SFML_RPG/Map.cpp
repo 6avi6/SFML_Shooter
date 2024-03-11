@@ -51,7 +51,7 @@ std::vector <sf::VertexArray> Map::getWallObject()const {
 
 void Map::addEnemy(float x,float y)
 {
-	auto newEnemy = std::make_unique<Enemy>(x, y,this->enemySettings.bulletSpeed, this->enemySettings.reloadTime);
+	auto newEnemy = std::make_unique<Enemy>(x, y,this->enemySettings.bulletSpeed, this->enemySettings.reloadTime, this->enemySettings.weaponDamage,this->enemySettings.enemyHealth);
 
 	// Addig enemy to vector
 	enemies.push_back(std::move(newEnemy));
@@ -83,7 +83,7 @@ void Map::addEnemy()
 	} while (enemyInWall);
 
 	// Creating a new instance of an enemy
-	enemies.push_back(std::make_unique<Enemy>(randomX, randomY,this->enemySettings.bulletSpeed, this->enemySettings.reloadTime));
+	enemies.push_back(std::make_unique<Enemy>(randomX, randomY,this->enemySettings.bulletSpeed, this->enemySettings.reloadTime, this->enemySettings.weaponDamage, this->enemySettings.enemyHealth));			///do zmiany ¿ycie i dmg na dnyamiczne
 	
 }
 

@@ -5,6 +5,8 @@ struct PlayerSettings {
     float speed;
     float reloadTime;
     float bulletSpeed;
+    float weaponDamage;
+    float playerHealth;
 
     // Copy operator
     PlayerSettings& operator=(const PlayerSettings& other) {
@@ -12,6 +14,8 @@ struct PlayerSettings {
             this->speed = other.speed;
             this->reloadTime = other.reloadTime;
             this->bulletSpeed = other.bulletSpeed;
+            this->weaponDamage = other.weaponDamage;
+            this->playerHealth = other.playerHealth;
         }
         return *this;
     }

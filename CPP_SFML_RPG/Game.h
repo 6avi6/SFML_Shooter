@@ -52,7 +52,7 @@ private:
 	
 	//init player
 	void initPlayer();
-	void initPlayer(int playerSpeed, float weaponSpeed, float weaponReload);
+	
 
 	
 

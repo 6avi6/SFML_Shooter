@@ -5,9 +5,7 @@
 #define M_PI 3.14159265358979323846
 
 //initialization of variables
-void Weapon::initVariabels(float weaponSpeed, float weaponReload) {
-	this->weaponSpeed = weaponSpeed;
-	this->weaponReload = weaponReload;
+void Weapon::initVariabels() {
 	this->weaponeRange = 1005.f;
 	this->weaponFired = false;
 	this->scaleOfBulletSprite.x = 4.f;
@@ -36,8 +34,10 @@ void Weapon::loadTextures()
 }
 
 //Weapon constructor
-Weapon::Weapon(float weaponSpeed,float weaponReload){
-	this->initVariabels(weaponSpeed, weaponReload);
+Weapon::Weapon(float weaponSpeed,float weaponReload, float weaponDamage):
+	weaponDamage(weaponDamage), weaponSpeed(weaponSpeed), weaponReload(weaponReload)
+{
+	this->initVariabels();
 	this->loadTextures();
 	
 
@@ -151,4 +151,9 @@ bool Weapon:: getWeaponWasFired() const{
 void Weapon::setWeaponWasFired(bool statusOfWeapon) {
 
 	 this->weaponFired = statusOfWeapon;
+}
+
+const float Weapon::getWeaponDamage()
+{
+	return this->weaponDamage;
 }

@@ -25,9 +25,9 @@ void Enemy::initEnemy() {
 }
 
 //creating new weapon
-void Enemy::initWeapon(float weaponSpeed, float weaponReload) {
+void Enemy::initWeapon(float weaponSpeed, float weaponReload, float weaponDamage) {
 	
-	this->weapon = new Weapon(weaponSpeed, weaponReload);
+	this->weapon = new Weapon(weaponSpeed, weaponReload, weaponDamage);
 }
 
 //default constructor
@@ -43,11 +43,12 @@ Enemy::Enemy(float x, float y)
 	this->enemyEntity.setPosition(x,y);
 }
 
-Enemy::Enemy(float x, float y, float weaponSpeed, float weaponReload)
+Enemy::Enemy(float x, float y, float weaponSpeed, float weaponReload, float weaponDamage, float enemyHealth):
+	enemyHealth(enemyHealth)
 {
 	this->initEnemy();
 	this->enemyEntity.setPosition(x, y);
-	this->initWeapon(weaponSpeed, weaponReload);
+	this->initWeapon(weaponSpeed, weaponReload, weaponDamage);
 }
 
 //defualt deconstructor
@@ -66,6 +67,16 @@ const sf::Sprite Enemy::getEnemyShape()
 {
 	return this->enemyEntity;
 
+}
+
+void Enemy::enemyReactionToDamage(float playerWeaponDamage)
+{
+	this->enemyHealth -=playerWeaponDamage;
+}
+
+const float Enemy::getEnemyHealth()
+{
+	return this->enemyHealth;
 }
 
 
