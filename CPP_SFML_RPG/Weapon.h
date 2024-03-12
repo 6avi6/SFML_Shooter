@@ -20,9 +20,10 @@ private:
 	//bullet looks//
 	
 	sf::Vector2f scaleOfBulletSprite;//how big it is
-	sf::Texture weponTexture;//weapon skins
+	sf::Texture bulletTexture;//bullet skin
 	sf::Sprite bulletSkin;//drwable object of bullet
-
+	sf::Texture weponTexture;//weapon skin
+	sf::Sprite weponSkin;
 
 	std::vector<sf::VertexArray> bullets;//vector having all bullets
 
@@ -41,6 +42,7 @@ public:
 	//default deconstructor 
 	~Weapon();
 
+	void aimGun(sf::Vector2f gunHolder, sf::Vector2i globalMousePosition);
 
 	 //adding new bullet
 	 void addNewBullet(sf::Vector2f gunHolder, sf::Vector2i target);
@@ -49,7 +51,7 @@ public:
 
 	 //drawing all bullets
 	 void renderBullets(sf::RenderTarget& window);
-
+	 void renderWeapon(sf::RenderTarget& window);
 	 //getter of bullets
 	 std::vector<sf::VertexArray>& getBullets();
 

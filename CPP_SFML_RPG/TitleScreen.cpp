@@ -147,19 +147,6 @@ void TitleScreen::readSettingsFromFile() {
 
     inputFile.close();
 
-    std::cout << "Player Settings:\n";
-    std::cout << "Speed: " << gameplaySettings->player.speed << "\n";
-    std::cout << "Bullet Speed: " << gameplaySettings->player.bulletSpeed << "\n";
-    std::cout << "Reload Time: " << gameplaySettings->player.reloadTime << "\n";
-    std::cout << "Player Health: " << gameplaySettings->player.playerHealth << "\n";
-    std::cout << "Weapon Damage: " << gameplaySettings->player.weaponDamage << "\n\n";
-
-    std::cout << "Enemy Settings:\n";
-    std::cout << "Bullet Speed: " << gameplaySettings->enemy.bulletSpeed << "\n";
-    std::cout << "Reload Time: " << gameplaySettings->enemy.reloadTime << "\n";
-    std::cout << "Number of Enemies: " << gameplaySettings->enemy.numEnemies << "\n";
-    std::cout << "Enemy Health: " << gameplaySettings->enemy.enemyHealth << "\n";
-    std::cout << "Weapon Damage: " << gameplaySettings->enemy.weaponDamage << "\n";
 }
 
 

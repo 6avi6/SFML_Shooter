@@ -193,6 +193,7 @@ void Map::drawMap(sf::RenderTarget& window) {
 		for (int e = 0; e < enemies.size(); e++) {
 			enemies[e]->render(window);
 			enemies[e]->weapon->renderBullets(window);
+			enemies[e]->weapon->renderWeapon(window);
 		}
 	}
 }
@@ -282,4 +283,30 @@ void Map::createTestMap() {
 	for (int i = 0; i < this->enemySettings.numEnemies; i++) {
 		this->addEnemy();
 	}
+
+	
+	///
+	
+	position = sf::Vector2f(700.f, 500.f);
+
+	size = sf::Vector2f(150.f, 150.f);
+	
+
+	rectangle[0].position = position;
+	rectangle[1].position = position + sf::Vector2f(size.x, 0.f);
+
+	rectangle[2].position = position + size;
+	rectangle[3].position = position + sf::Vector2f(0.f, size.y);
+	for (int i = 0; i < 4; ++i) {
+		rectangle[i].color = color;
+	}
+
+
+	// Set the color with alpha value
+	sf::Color blueWithAlpha(50, 0, 200, 200);
+	for (int i = 0; i < 4; ++i) {
+		rectangle[i].color = blueWithAlpha;
+	}
+
+	this->passableObjects.push_back(rectangle);
 }

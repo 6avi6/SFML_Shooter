@@ -17,19 +17,35 @@ void Weapon::loadTextures()
 {
 	
 	//reading texture
-	if (!this->weponTexture.loadFromFile("Assets/Textures/Wepon/Bullet/bulletSample.png"))
+	if (!this->bulletTexture.loadFromFile("Assets/Textures/Wepon/Bullet/bulletSample.png"))
 	{
 		std::cout << "ERROR::WEAPON::loadTextures()::'couldn't load texture of bullet'" << std::endl;
 	}
 	else {
 		//setting sprite skin
-		this->bulletSkin.setTexture(weponTexture);
+		this->bulletSkin.setTexture(bulletTexture);
 		
 		//resizeing bullet
 		this->bulletSkin.scale(this->scaleOfBulletSprite.x, this->scaleOfBulletSprite.y);
 
 		//Setting center of bullet 
 		this->bulletSkin.setOrigin(this->bulletSkin.getLocalBounds().width / 2, 0.f);
+	}
+	//reading texture
+	if (!this->weponTexture.loadFromFile("Assets/Textures/Wepon/Weapon/weponTexture.png"))
+	{
+		std::cout << "ERROR::WEAPON::loadTextures()::'couldn't load texture of weapon'" << std::endl;
+	}
+	else {
+		//setting sprite skin
+		this->weponSkin.setTexture(weponTexture);
+
+		//resizeing bullet
+		this->weponSkin.scale(1.f, 1.5f);
+		this->weponSkin.setOrigin(16.f, 8.f );
+
+		//Setting center of bullet 
+		
 	}
 }
 
@@ -49,7 +65,18 @@ Weapon::~Weapon()
 	
 
 }
+void Weapon::aimGun(sf::Vector2f gunHolder, sf::Vector2i globalMousePosition) {
+// Calculate angle between player and mouse
+float angle = atan2(globalMousePosition.y - gunHolder.y-32.f , globalMousePosition.x - gunHolder.x-16.f );
+angle *= 180.f / static_cast<float>(M_PI); // Convert radians to degrees
 
+// Rotate gun sprite to face mouse direction
+this->weponSkin.setRotation(angle);
+
+// Set gun position to player position
+this->weponSkin.setPosition(gunHolder.x+16.f, gunHolder.y+ 32.f);
+
+}
 
 //method adding new bullets
 void Weapon::addNewBullet(sf::Vector2f gunHolder, sf::Vector2i globalMousePosition) {
@@ -66,7 +93,7 @@ void Weapon::addNewBullet(sf::Vector2f gunHolder, sf::Vector2i globalMousePositi
 		sf::Vector2f direction = diff / length;
 
 		// Setting the end position of the line to a fixed length of 100 units
-		bullet[0].position = bullet[0].position + direction * 15.f;
+		bullet[0].position = bullet[0].position + direction * 64.f;
 		bullet[1].position = bullet[0].position + direction * weaponeRange;
 
 		//bullet[0].color = sf::Color::Blue;
@@ -100,6 +127,11 @@ void Weapon::renderBullets(sf::RenderTarget& window) {
 		}
 	}
 	
+}
+
+void Weapon::renderWeapon(sf::RenderTarget& window)
+{
+	window.draw(this->weponSkin);
 }
 
 //drawing all bullets

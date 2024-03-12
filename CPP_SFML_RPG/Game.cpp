@@ -98,7 +98,8 @@ void Game::getMousePosition()
 //creating new player
 void Game::initPlayer()
 {
-	player = new Player(this->windowSize, this->gameplaySettings->player.speed, this->gameplaySettings->player.bulletSpeed,  this->gameplaySettings->player.reloadTime, this->gameplaySettings->player.weaponDamage, this->gameplaySettings->player.playerHealth);
+	this->player = new Player(this->windowSize, this->gameplaySettings->player.speed, this->gameplaySettings->player.bulletSpeed,  this->gameplaySettings->player.reloadTime, this->gameplaySettings->player.weaponDamage, this->gameplaySettings->player.playerHealth);
+	this->player->setPosition(this->window->getSize().x / 2, this->window->getSize().y / 2);
 }
 
 
@@ -184,7 +185,7 @@ void Game::render()
 {
 
 	
-
+	
 
 	//enemie fighting back
 	if (!this->currentMap->enemies.empty())
@@ -199,7 +200,8 @@ void Game::render()
 
 	
 	for (int e = 0; e < this->currentMap->enemies.size(); e++) {
-
+		this->currentMap->enemies[e]->weapon->aimGun(this->currentMap->enemies[e]->getEnemyShape().getPosition(), sf::Vector2i(this->player->getPlayerPostion().x, this->player->getPlayerPostion().y));
+		
 		//player hitted by 'e'
 		this->player->playerReactionToDamge(this->currentMap->checkIfTargetIsHittedByBullets(this->player->getShape(), this->currentMap->enemies[e]->weapon->getBullets())* this->currentMap->enemies[e]->weapon->getWeaponDamage());
 		//enemie hitted
@@ -251,7 +253,8 @@ void Game::render()
 
 	//player drawning
 	this->player->render(*this->window);
-
+	this->player->weapon->aimGun(this->player->getPlayerPostion(), sf::Mouse::getPosition(*window));
+	this->player->weapon->renderWeapon(*window);
 
 
 

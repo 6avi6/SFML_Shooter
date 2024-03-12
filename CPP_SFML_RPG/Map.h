@@ -26,7 +26,7 @@ private:
 	int numberOfMap;//number of map identyfication that will be load
 	sf::Vector2f map_size;//sizes of map
 	std::vector <sf::VertexArray> wallsObjects;//vector with all non passable by player objects
-	std::vector <sf::Sprite> passableObjects;//vector with all passable by player objects
+	std::vector <sf::VertexArray> passableObjects;//vector with all passable by player objects
 
 
 	//method that will be read map from json file !!TO DO!!
