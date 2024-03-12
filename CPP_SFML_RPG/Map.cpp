@@ -191,7 +191,7 @@ void Map::drawMap(sf::RenderTarget& window) {
 	//Drawing enemies Sprite
 	if (!enemies.empty()) {
 		for (int e = 0; e < enemies.size(); e++) {
-			window.draw(enemies[e]->getEnemyShape());
+			enemies[e]->render(window);
 			enemies[e]->weapon->renderBullets(window);
 		}
 	}

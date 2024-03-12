@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Weapon.h"
 
+#include "HealthBar.h"
 
 class Enemy {
 private:
@@ -17,7 +18,7 @@ private:
 
 	//object of enemy with texture
 	sf::Sprite enemyEntity;
-
+	sf::Vector2f enemyPosition;
 	//initialization of variables
 	void initEnemy();
 
@@ -28,6 +29,7 @@ public:
 	//initializer weapon
 	void initWeapon(float weaponSpeed=4.f, float weaponReload=20.f, float weaponDamage=5.f);
 
+	HealthBar* enemyHealthBar;
 
 	//default enemy constructor spawns enemy on 0;0 corrdinates
 	Enemy();

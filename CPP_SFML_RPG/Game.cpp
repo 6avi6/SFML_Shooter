@@ -98,7 +98,7 @@ void Game::getMousePosition()
 //creating new player
 void Game::initPlayer()
 {
-	player = new Player(this->windowSize, this->gameplaySettings->player.speed, this->gameplaySettings->player.bulletSpeed,  this->gameplaySettings->player.reloadTime,  this->gameplaySettings->player.playerHealth, this->gameplaySettings->player.weaponDamage);
+	player = new Player(this->windowSize, this->gameplaySettings->player.speed, this->gameplaySettings->player.bulletSpeed,  this->gameplaySettings->player.reloadTime, this->gameplaySettings->player.weaponDamage, this->gameplaySettings->player.playerHealth);
 }
 
 
@@ -191,7 +191,7 @@ void Game::render()
 		for (int e = 0; e < this->currentMap->enemies.size(); e++) {
 
 			{
-				this->currentMap->enemies[e]->weapon->addNewBullet(this->currentMap->enemies[e]->getEnemyShape().getPosition(), sf::Vector2i(this->player->getPlayerPostion().x, this->player->getPlayerPostion().y));
+				this->currentMap->enemies[e]->weapon->addNewBullet(this->currentMap->enemies[e]->getEnemyShape().getPosition(), sf::Vector2i(this->player->getPlayerPostion().x, this->player->getPlayerPostion().y+32.f));
 
 			}
 		}
@@ -202,12 +202,13 @@ void Game::render()
 
 		//player hitted by 'e'
 		this->player->playerReactionToDamge(this->currentMap->checkIfTargetIsHittedByBullets(this->player->getShape(), this->currentMap->enemies[e]->weapon->getBullets())* this->currentMap->enemies[e]->weapon->getWeaponDamage());
-		
 		//enemie hitted
 
 		int enemieHittedByPlayerCounter = this->currentMap->checkIfTargetIsHittedByBullets(this->currentMap->enemies[e]->getEnemyShape(), this->player->weapon->getBullets());
 		if (enemieHittedByPlayerCounter>0){
-			this->currentMap->enemies[e]->enemyReactionToDamage(this->player->weapon->getWeaponDamage()*enemieHittedByPlayerCounter);
+			
+			this->currentMap->enemies[e]->enemyReactionToDamage(this->player->weapon->getWeaponDamage()* enemieHittedByPlayerCounter);
+
 			//if enemy is killed by player
 			if (this->currentMap->enemies[e]->getEnemyHealth() <= 0) {
 				this->currentMap->enemies.erase(this->currentMap->enemies.begin() + e);

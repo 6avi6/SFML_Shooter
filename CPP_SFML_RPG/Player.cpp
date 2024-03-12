@@ -26,7 +26,7 @@ void Player::initValues(sf::Vector2i windowSize=sf::Vector2i(0.f, 0.f))
 	
 	//attrbiutes
 	this->speed = 7;
-
+	this->playerHealthBar = new HealthBar(&(this->positonOfPlayer), this->playerHealth, sf::Color(7, 173, 10));
 	
 	
 }
@@ -57,6 +57,7 @@ Player::Player(const sf::Vector2i windowSize,int playerSpeed, float weaponSpeed,
 	this->initValues();
 	this->initWeapon(weaponSpeed, weaponReload, weaponDamage);
 	this->speed=playerSpeed;
+	
 	
 }
 
@@ -129,6 +130,7 @@ void Player::setPosition(float xCoordinate, float yCoordinate) {
 void Player::render(sf::RenderTarget& window)
 {
 	this->playerEntity.setPosition(this->positonOfPlayer.x, this->positonOfPlayer.y);
+	playerHealthBar->render(window,this->playerHealth);
 	window.draw(this->playerEntity);
 }
 

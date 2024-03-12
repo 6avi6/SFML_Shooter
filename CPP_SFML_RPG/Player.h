@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "Weapon.h"
+#include "HealthBar.h"
 class Player {
 private:
 	//player look//
@@ -37,6 +38,8 @@ public:
 	const float getPlayerHealth();
 
 	void playerReactionToDamge(float enemyWeaponDamage);
+
+	HealthBar* playerHealthBar;
 
 	//default spawns player at 0,0
 	Player();

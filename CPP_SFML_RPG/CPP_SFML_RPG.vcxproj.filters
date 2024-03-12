@@ -69,6 +69,9 @@
     <ClCompile Include="SettingsScreen.cpp">
       <Filter>Pliki źródłowe\ScreensSource</Filter>
     </ClCompile>
+    <ClCompile Include="HealthBar.cpp">
+      <Filter>Pliki źródłowe\ElementsSource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Slider.h">
@@ -103,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="SettingsScreen.h">
       <Filter>Pliki nagłówkowe\ScreensHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBar.h">
+      <Filter>Pliki nagłówkowe\ElementsHeader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -20,8 +20,6 @@ void Enemy::initEnemy() {
 
 	}
 	
-	
-	
 }
 
 //creating new weapon
@@ -48,6 +46,10 @@ Enemy::Enemy(float x, float y, float weaponSpeed, float weaponReload, float weap
 {
 	this->initEnemy();
 	this->enemyEntity.setPosition(x, y);
+	this->enemyPosition.x = x;
+	this->enemyPosition.y = y;
+	this->enemyHealthBar = new HealthBar(&enemyPosition, this->enemyHealth, sf::Color(140, 7, 7));
+	
 	this->initWeapon(weaponSpeed, weaponReload, weaponDamage);
 }
 
@@ -58,8 +60,9 @@ Enemy::~Enemy(){
 
 //method rendering on targetted window
 void Enemy::render(sf::RenderTarget& window) {
-
+	this->enemyHealthBar->render(window, this->enemyHealth);
 	window.draw(this->enemyEntity);
+
 }
 
 //getter of enemy shape is used mainly to detect collison with bullet
