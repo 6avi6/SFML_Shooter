@@ -54,7 +54,6 @@ void TitleScreen::drawScreen()
                         this->initGame();
                         this->openGame();
 
-                        std::cout << "Play button clicked!" << std::endl;
                     }
                     else if (quitButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
                         // Handle Quit button click
@@ -65,7 +64,6 @@ void TitleScreen::drawScreen()
                         this->initSettingScreen();
                         this->openSettingScreen();
                         delete this->settingsScreen;
-                        std::cout << "Settings button clicked!" << std::endl;
                     }
                 }
             }

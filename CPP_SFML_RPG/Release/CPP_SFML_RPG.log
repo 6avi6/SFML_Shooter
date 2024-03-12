@@ -1,76 +1,96 @@
-﻿  Game.cpp
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(8,23): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
-          with
-          [
-              T=int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(9,23): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
-          with
-          [
-              T=int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(86,33): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
-          with
-          [
-              T=int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(92,33): warning C4244: "=": konwersja z "float" do "T", możliwa utrata danych
-          with
-          [
-              T=int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(101,76): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(102,85): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(102,54): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(192,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(195,200): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+﻿  TitleScreen.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(5,47): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
           with
           [
               T=float
           ]
-          and
-          [
-              T=int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(195,162): warning C4244: "argument": konwersja z "const T" do "T", możliwa utrata danych
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(5,36): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
           with
           [
               T=float
           ]
-          and
-          [
-              T=int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(202,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(203,190): warning C4244: "argument": konwersja z "const T" do "T", możliwa utrata danych
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(6,52): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
           with
           [
               T=float
           ]
-          and
-          [
-              T=int
-          ]
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.cpp(203,154): warning C4244: "argument": konwersja z "const T" do "T", możliwa utrata danych
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(6,40): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
           with
           [
               T=float
           ]
-          and
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(7,48): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(7,36): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(53,83): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
           [
               T=int
           ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(53,71): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(58,88): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(58,76): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(62,92): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(62,80): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(74,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(75,31): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(75,93): warning C4244: "+=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(77,55): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.cpp(77,52): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
   Trwa generowanie kodu
-  5 of 557 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
+  4 of 557 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    12 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
   CPP_SFML_RPG.vcxproj -> C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Release\CPP_SFML_RPG.exe

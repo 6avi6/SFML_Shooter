@@ -1,12 +1,22 @@
 ﻿  CPP_SFML_RPG.cpp
-C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Screens.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
   Enemy.cpp
 C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Enemy.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
   Game.cpp
 C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Game.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
+  HealthBar.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\HealthBar.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
   Map.cpp
 C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Map.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
   Player.cpp
 C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Player.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
+  Screens.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Screens.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
+  SettingsScreen.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Slider.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
+  Slider.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Slider.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
+  TitleScreen.cpp
+C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\TitleScreen.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
   Weapon.cpp
 C:\Users\Dawid\Desktop\SFML_RPG\CPP_SFML_RPG\Weapon.h(4,10): fatal  error C1083: Nie można otworzyć pliku dołącz: 'SFML/Graphics.hpp': No such file or directory
